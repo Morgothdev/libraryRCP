@@ -1,35 +1,43 @@
 package libraryRCP.data;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 public class ClassBooksDataBase extends AbstractBooksDataBase {
 
+	private Map<Long, Book> db = new HashMap<Long, Book>();
+	long maxID = 0;
+	
+	
 	public ClassBooksDataBase(Properties properties) {
 		super(properties);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void addBook(Book newBook) {
-		// TODO Auto-generated method stub
-
+		newBook.setId(maxID++);
+		db.put(newBook.getId(), newBook);
 	}
 
 	@Override
 	public void removeBook(Book bookToDelete) {
-		// TODO Auto-generated method stub
-
+		db.remove(bookToDelete.getId());
 	}
 
 	@Override
 	public Book getBookByID(long bookID) {
-		// TODO Auto-generated method stub
-		return null;
+		return db.get(bookID);
 	}
 
 	@Override
 	public Book getBook(String author, String title) {
-		// TODO Auto-generated method stub
+		for(Entry<Long, Book> book : db.entrySet()){
+			if(book.getValue().getAuthor().equals(author)&& book.getValue().getTitle().equals(title)){
+				return book.getValue();
+			}
+		}
 		return null;
 	}
 
