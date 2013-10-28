@@ -1,6 +1,8 @@
 package libraryRCP.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -17,8 +19,9 @@ public class ClassBooksDataBase extends AbstractBooksDataBase {
 
 	@Override
 	public void addBook(Book newBook) {
-		newBook.setId(maxID++);
-		db.put(newBook.getId(), newBook);
+		long bookID = maxID++;
+		newBook.setId(bookID);
+		db.put(bookID, newBook);
 	}
 
 	@Override
@@ -39,6 +42,11 @@ public class ClassBooksDataBase extends AbstractBooksDataBase {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Book> getBooks() {
+		return new ArrayList<Book>(db.values());
 	}
 
 }

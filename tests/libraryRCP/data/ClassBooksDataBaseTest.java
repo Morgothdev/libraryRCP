@@ -1,9 +1,9 @@
 package libraryRCP.data;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
@@ -16,8 +16,8 @@ public class ClassBooksDataBaseTest {
 
 	private static final String BOOK_AUTHOR = "Author of Book";
 	private static final String BOOK_TITLE = "Title of Book";
-	@Mock
-	private Book mockedBook;
+	@Mock private Book mockedBook;
+	@Mock private Book secondMockedBook = mock(Book.class);
 	private ClassBooksDataBase testedClassBooks;
 
 	@Before
@@ -26,7 +26,6 @@ public class ClassBooksDataBaseTest {
 		when(mockedBook.getAuthor()).thenReturn(BOOK_AUTHOR);
 		when(mockedBook.getTitle()).thenReturn(BOOK_TITLE);
 		testedClassBooks = new ClassBooksDataBase(new Properties());
-		testedClassBooks.addBook(mockedBook);
 		doAnswer(new Answer<Object>() {
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
@@ -35,6 +34,8 @@ public class ClassBooksDataBaseTest {
 				return null;
 			}
 		}).when(mockedBook).setId(anyLong());
+		testedClassBooks.addBook(mockedBook);
+
 	}
 
 	@Test
@@ -54,5 +55,16 @@ public class ClassBooksDataBaseTest {
 	public void testGetBookByID() {
 		assertEquals(mockedBook,
 				testedClassBooks.getBookByID(mockedBook.getId()));
+	}
+	
+	@Test
+	public void testGetBooks(){
+		when(secondMockedBook.getAuthor()).thenReturn("Another Author");
+		when(secondMockedBook.getTitle()).thenReturn("Another Title");
+		testedClassBooks.addBook(secondMockedBook);
+		
+		List<Book> booksList = testedClassBooks.getBooks();
+		assertTrue(booksList.contains(mockedBook));
+		assertTrue(booksList.contains(secondMockedBook));		
 	}
 }
