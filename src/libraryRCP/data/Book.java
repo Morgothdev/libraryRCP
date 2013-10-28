@@ -26,6 +26,15 @@ public class Book {
 		dateOfReturn = null;
 	}
 
+	@Override
+	public boolean equals(Object another){
+		Book anotherBook = (Book)another;
+		if(another==null){
+			return false;
+		}
+		return author.equals(anotherBook.author)&&title.equals(anotherBook.title);
+	}
+
 	public Book.STATUS getStatus() {
 		return status;
 	}
