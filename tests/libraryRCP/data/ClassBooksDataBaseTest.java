@@ -1,6 +1,7 @@
 package libraryRCP.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 import java.util.Properties;
@@ -8,7 +9,6 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.And;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
