@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import java.util.Properties;
 
 import libraryRCP.data.BookManager;
+import libraryRCP.data.Books;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,17 +20,17 @@ public class BookManagerWithClassImplementationTest {
 	@Before
 	public void setUp() throws Exception {
 		properties = new Properties();
-		properties.put("data.access.class", "libraryRCP.data.ClassDataBase");
+		properties.put("data.access.class", "libraryRCP.data.ClassBooksDataBase");
 	}
 
 	@Test
 	public void testConfigureClassImplementationOfBooksWithValidData() {
 		BookManager.configure(properties);
-		bookManager = BookManager.getInstance();
+		Books books = BookManager.getInstance();
 
-		assertNotNull(bookManager);
-		assertEquals(bookManager.getClass().getName(),
-				"libraryRCP.data.ClassDataBase");
+		assertNotNull(books);
+		assertEquals(books.getClass().getName(),
+				"libraryRCP.data.ClassBooksDataBase");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
