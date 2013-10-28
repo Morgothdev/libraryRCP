@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-public class ClassBooksDataBase extends AbstractBooksDataBase {
+public class ClassBooksDataBase extends BooksDataBase {
 
 	private Map<Long, Book> db = new HashMap<Long, Book>();
 	long maxID = 0;
@@ -16,7 +16,7 @@ public class ClassBooksDataBase extends AbstractBooksDataBase {
 	public ClassBooksDataBase(Properties properties) {
 		super(properties);
 	}
-
+	
 	@Override
 	public void addBook(Book newBook) {
 		long bookID = maxID++;

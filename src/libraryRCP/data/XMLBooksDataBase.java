@@ -3,7 +3,7 @@ package libraryRCP.data;
 import java.util.List;
 import java.util.Properties;
 
-public class XMLBooksDataBase extends AbstractBooksDataBase{
+public class XMLBooksDataBase extends BooksDataBase{
 
 	public XMLBooksDataBase(Properties properties) {
 		super(properties);
