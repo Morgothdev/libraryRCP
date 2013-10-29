@@ -13,5 +13,5 @@ public interface Books {
 	
 	public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister);
 	public void removeOnChangeDataListener(Object listenerToRemove);
-	public abstract void notifyOnChangeDataListeners();
+	public void notifyOnChangeDataListeners();
 }

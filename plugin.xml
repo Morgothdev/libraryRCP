@@ -11,6 +11,10 @@
                name="applicationCSS"
                value="platform:/plugin/LibraryRCP/css/default.css">
          </property>
+         <property
+               name="appName"
+               value="LibraryRCP">
+         </property>
       </product>
    </extension>
 

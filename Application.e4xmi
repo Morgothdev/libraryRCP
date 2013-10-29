@@ -5,7 +5,7 @@
       <children xsi:type="advanced:Perspective" xmi:id="_vC5KUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspective.0">
         <children xsi:type="basic:PartSashContainer" xmi:id="_v4wbUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.0" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_3OMX0D_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.0">
-            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" label="Books List"/>
+            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List"/>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1">
             <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1">
@@ -13,7 +13,7 @@
               <children xsi:type="basic:Part" xmi:id="_Cv78sD_PEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Remove" label="Remove Book"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2">
-              <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" label="Overview"/>
+              <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview"/>
             </children>
           </children>
         </children>
