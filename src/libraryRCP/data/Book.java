@@ -78,4 +78,8 @@ public class Book {
 	public String getTitle() {
 		return title;
 	}
+
+	public Integer getYearOfPublication() {
+		return 2000;
+	}
 }
