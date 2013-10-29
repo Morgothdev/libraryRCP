@@ -45,7 +45,7 @@ public class ClassBooksDataBase extends BooksDataBase {
 	}
 
 	@Override
-	public synchronized List<Book> getBooks() {
+	public synchronized List<Book> getAllBooks() {
 		return new ArrayList<Book>(db.values());
 	}
 }

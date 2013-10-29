@@ -59,7 +59,7 @@ public class ClassBooksDataBaseTest extends BooksDataBaseTest {
 		when(secondMockedBook.getTitle()).thenReturn("Another Title");
 		testedClassBooks.addBook(secondMockedBook);
 	
-		List<Book> booksList = testedClassBooks.getBooks();
+		List<Book> booksList = testedClassBooks.getAllBooks();
 		assertTrue(booksList.contains(mockedBook));
 		assertTrue(booksList.contains(secondMockedBook));
 	}

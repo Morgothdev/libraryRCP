@@ -77,7 +77,7 @@ public class XMLBooksDataBase extends BooksDataBase {
 	}
 
 	@Override
-	public synchronized List<Book> getBooks() {
+	public synchronized List<Book> getAllBooks() {
 		return read();
 	}
 	

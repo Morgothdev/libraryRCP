@@ -57,7 +57,7 @@ public class XMLBooksDataBaseTest extends BooksDataBaseTest {
 		Book secondBook = new Book("Another Author","Another Title");
 		testedClassBooks.addBook(secondBook);
 	
-		List<Book> booksList = testedClassBooks.getBooks();
+		List<Book> booksList = testedClassBooks.getAllBooks();
 		assertTrue(booksList.contains(mockedBook));
 		assertTrue(booksList.contains(secondBook));
 	}

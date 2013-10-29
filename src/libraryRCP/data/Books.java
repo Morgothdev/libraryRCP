@@ -8,7 +8,7 @@ public interface Books {
 	public void removeBook(Book bookToDelete);
 	public Book getBookByID(long bookID);
 	public Book getBook(String author, String title);
-	public List<Book> getBooks();
+	public List<Book> getAllBooks();
 	
 	public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister);
 	public void removeOnChangeDataListener(Object listenerToRemove);
