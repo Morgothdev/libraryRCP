@@ -15,10 +15,10 @@ import org.junit.Test;
 public class XMLBooksDataBaseTest extends BooksDataBaseTest {
 
 	protected Book mockedBook;
-	protected BooksDataBase testedClassBooks;
+	protected Books testedClassBooks;
 	volatile int count = 0;
 	
-	protected BooksDataBase getTestedBooksDataBase() throws IOException {
+	protected Books getTestedBooksDataBase() throws IOException {
 		Properties properties = new Properties();
 		String filename = "test"+Integer.toString(count++)+".xml";
 		properties.put("data.access.filePath", filename);

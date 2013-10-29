@@ -44,6 +44,7 @@ public class XMLBooksDataBase extends BooksDataBase {
 		books.add(newBook);
 		System.out.println(books);
 		writeListIntoFile(books);
+		notifyOnChangeDataListeners();
 	}
 
 	@Override
@@ -51,6 +52,20 @@ public class XMLBooksDataBase extends BooksDataBase {
 		List<Book> readedList = read();
 		readedList.remove(bookToDelete);
 		writeListIntoFile(readedList);
+		notifyOnChangeDataListeners();
+	}
+
+	@Override
+	public void updateBook(Book bookToUpdate) {
+		List<Book> readedList = read();
+		for (Book book : readedList) {
+			if (book.getId() == bookToUpdate.getId()) {
+				readedList.remove(book);
+				readedList.add(bookToUpdate);
+			}
+		}
+		writeListIntoFile(readedList);
+		notifyOnChangeDataListeners();
 	}
 
 	@Override
@@ -68,8 +83,7 @@ public class XMLBooksDataBase extends BooksDataBase {
 	public synchronized Book getBook(String author, String title) {
 		List<Book> readedList = read();
 		for (Book book : readedList) {
-			if (book.getTitle().equals(title)
-					&& book.getAuthor().equals(author)) {
+			if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
 				return book;
 			}
 		}
@@ -80,7 +94,6 @@ public class XMLBooksDataBase extends BooksDataBase {
 	public synchronized List<Book> getAllBooks() {
 		return read();
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	private List<Book> read() {
@@ -113,7 +126,7 @@ public class XMLBooksDataBase extends BooksDataBase {
 			try {
 				String xmlString = xStream.toXML(listToWrite);
 				// LogManager.getLogger(getClass()).log(Level.ERROR,
-				//		"serialized xml: " + xmlString);
+				// "serialized xml: " + xmlString);
 				outputStream.write(xmlString.getBytes());
 			} finally {
 				try {

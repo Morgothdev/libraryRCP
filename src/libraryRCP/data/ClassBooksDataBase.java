@@ -21,13 +21,19 @@ public class ClassBooksDataBase extends BooksDataBase {
 		long bookID = maxID++;
 		newBook.setId(bookID);
 		db.put(bookID, newBook);
+		notifyOnChangeDataListeners();
 	}
 
 	@Override
 	public synchronized void removeBook(Book bookToDelete) {
 		db.remove(bookToDelete.getId());
-	}
+		notifyOnChangeDataListeners();	}
 
+	@Override
+	public void updateBook(Book bookToUpdate) {
+		notifyOnChangeDataListeners();
+	}
+	
 	@Override
 	public synchronized Book getBookByID(long bookID) {
 		return db.get(bookID);

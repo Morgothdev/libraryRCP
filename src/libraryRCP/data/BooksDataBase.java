@@ -20,7 +20,8 @@ public abstract class BooksDataBase implements Books {
 		listeners.remove(listenerToRemove);
 	}
 	
-	protected void notifyOnChangeDataListeners(){
+	@Override
+	public void notifyOnChangeDataListeners(){
 		for(OnChangeDataListener listener : listeners){
 			listener.onDataChange();
 		}

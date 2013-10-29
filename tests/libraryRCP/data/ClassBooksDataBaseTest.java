@@ -19,9 +19,9 @@ public class ClassBooksDataBaseTest extends BooksDataBaseTest {
 	protected Book mockedBook;
 	@Mock
 	protected Book secondMockedBook = mock(Book.class);
-	protected BooksDataBase testedClassBooks;
+	protected Books testedClassBooks;
 
-	protected BooksDataBase getTestedBooksDataBase(){
+	protected Books getTestedBooksDataBase(){
 		return new ClassBooksDataBase(new Properties());
 	}
 

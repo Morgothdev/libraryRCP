@@ -26,12 +26,29 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 		super(name);
 		books = booksInstance;
 		loadMapOfStatuses();
+		setDefaultOnStatusChangedListener();
 	}
 
 	protected void loadMapOfStatuses() {
 		for (Book book : books.getAllBooks()) {
 			mapOfBookStatuses.put(book.getId(), book.getStatus());
 		}
+	}
+
+	private void setDefaultOnStatusChangedListener() {
+		onBookStatusChangeListener = new OnBookStatusChangedListener() {
+			@Override
+			public void onChange(Book changedBook) {
+				StringBuilder messageBuilder = new StringBuilder();
+				messageBuilder.append("Status of book id:").append(changedBook.getId()).append("  is canged to ").append(changedBook.getStatus());
+				MessageDialog.openInformation(null, "Book status changed",messageBuilder.toString());
+			}
+		};
+	}
+	
+	
+	public void setOnBookStatusChangeListener(OnBookStatusChangedListener onBookStatusChangeListener) {
+		this.onBookStatusChangeListener = onBookStatusChangeListener;
 	}
 
 	@Override
@@ -60,13 +77,6 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 	}
 
 	private void whenBookStatusChanged(Book book) {
-		StringBuilder messageBuilder = new StringBuilder();
-		messageBuilder.append("Status of book id:").append(book.getId()).append("  is canged to ").append(book.getStatus());
-//		MessageDialog.openInformation(null, "Book status changed",messageBuilder.toString());
 		onBookStatusChangeListener.onChange(book);
-	}
-
-	public void setOnBookStatusChangeListener(OnBookStatusChangedListener onBookStatusChangeListener) {
-		this.onBookStatusChangeListener = onBookStatusChangeListener;
 	}
 }
