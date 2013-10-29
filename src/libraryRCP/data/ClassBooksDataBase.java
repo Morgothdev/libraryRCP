@@ -48,5 +48,4 @@ public class ClassBooksDataBase extends BooksDataBase {
 	public synchronized List<Book> getBooks() {
 		return new ArrayList<Book>(db.values());
 	}
-
 }

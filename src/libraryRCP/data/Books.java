@@ -9,4 +9,7 @@ public interface Books {
 	public Book getBookByID(long bookID);
 	public Book getBook(String author, String title);
 	public List<Book> getBooks();
+	
+	public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister);
+	public void removeOnChangeDataListener(Object listenerToRemove);
 }
