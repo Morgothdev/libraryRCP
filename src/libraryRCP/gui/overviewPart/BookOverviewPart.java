@@ -64,7 +64,7 @@ public class BookOverviewPart {
 
 	@Focus
 	public void onFocus() {
-		
+
 	}
 
 	@Inject
@@ -77,7 +77,8 @@ public class BookOverviewPart {
 		yearOfPublicationLabel.setText(selectedBook.getYearOfPublication().toString());
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY MM DD", Locale.ENGLISH);
 		Date loanedDate = selectedBook.getLoanedDate();
-		String dateString = (loanedDate != null) ? simpleDateFormat.format(loanedDate) : "---------";
+		String dateString = (loanedDate != null) ? simpleDateFormat.format(loanedDate)
+				: "---------";
 		loanedDateLabel.setText(dateString);
 		Date dateOfReturn = selectedBook.getDateOfReturn();
 		String returnDateString = (dateOfReturn != null) ? simpleDateFormat.format(dateOfReturn)

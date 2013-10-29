@@ -8,12 +8,11 @@ import libraryRCP.data.BookManager;
 
 public class BookModel {
 
-	 public List<Book> getBooks() {
-		    List<Book> books = new LinkedList<>();
-		    BookManager.configure();
-		    books = BookManager.getInstance().getAllBooks();
-		    return books;
-		  }
-	 
+	public List<Book> getBooks() {
+		List<Book> books = new LinkedList<>();
+		BookManager.configure();
+		books = BookManager.getInstance().getAllBooks();
+		return books;
+	}
 
 }

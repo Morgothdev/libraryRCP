@@ -17,22 +17,40 @@ public class Book {
 	private Date loanedDate;
 	private Date dateOfReturn;
 
-	public Book(String author, String title) {
+	private Integer yearOfPublication;
+
+	public Book(){
+	}
+	
+	public Book(String author, String title, String yearOfPublication) {
 		this.author = author;
 		this.title = title;
+		this.yearOfPublication = Integer.parseInt(yearOfPublication);
 		status = Book.STATUS.AVAIBLE;
 		id = -1;
 		loanedDate = null;
 		dateOfReturn = null;
 	}
 
+	public Book(long id, String author, String title, STATUS status, Date loanedDate,
+			Date dateOfReturn, Integer yearOfPublication) {
+		super();
+		this.id = id;
+		this.author = author;
+		this.title = title;
+		this.status = status;
+		this.loanedDate = loanedDate;
+		this.dateOfReturn = dateOfReturn;
+		this.yearOfPublication = yearOfPublication;
+	}
+
 	@Override
-	public boolean equals(Object another){
-		Book anotherBook = (Book)another;
-		if(another==null){
+	public boolean equals(Object another) {
+		Book anotherBook = (Book) another;
+		if (another == null) {
 			return false;
 		}
-		return author.equals(anotherBook.author)&&title.equals(anotherBook.title);
+		return author.equals(anotherBook.author) && title.equals(anotherBook.title);
 	}
 
 	public Book.STATUS getStatus() {
@@ -80,6 +98,6 @@ public class Book {
 	}
 
 	public Integer getYearOfPublication() {
-		return 2000;
+		return yearOfPublication;
 	}
 }

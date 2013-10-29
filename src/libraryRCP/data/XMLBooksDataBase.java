@@ -31,8 +31,7 @@ public class XMLBooksDataBase extends BooksDataBase {
 		if (!xmlFile.exists()) {
 			xmlFile.createNewFile();
 		}
-		xStream.alias("Book", Book.class);
-		xStream.alias("Library", LinkedList.class);
+		//xStream.setClassLoader(classLoader);
 	}
 
 	@Override
@@ -90,19 +89,24 @@ public class XMLBooksDataBase extends BooksDataBase {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public synchronized List<Book> getAllBooks() {
-		return read();
+		return (List<Book>) read();
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<Book> read() {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private List read() {
 		List<Book> readedList;
 		FileInputStream fileInputStream;
 		try {
 			fileInputStream = new FileInputStream(xmlFile);
 			try {
-				readedList = (List<Book>) xStream.fromXML(fileInputStream);
+				
+				byte[] readed = new byte[100000];
+				fileInputStream.read(readed);
+				System.out.println(readed.length+" znaków: \""+(new String(readed))+"\"");
+				readedList = (List) xStream.fromXML(new String(readed));
 				maxID = 0;
 				for (Book book : readedList) {
 					if (book.getId() >= maxID) {
@@ -114,12 +118,12 @@ public class XMLBooksDataBase extends BooksDataBase {
 				fileInputStream.close();
 			}
 		} catch (Exception e) {
-			LogManager.getLogger(getClass()).log(Level.ERROR, "", e);
+			LogManager.getLogger(getClass()).log(Level.ERROR, "read", e);
 			return new LinkedList<Book>();
 		}
 	}
 
-	private void writeListIntoFile(List<Book> listToWrite) {
+	private void writeListIntoFile(@SuppressWarnings("rawtypes") List listToWrite) {
 		FileOutputStream outputStream = null;
 		try {
 			outputStream = new FileOutputStream(xmlFile, false);
@@ -129,14 +133,10 @@ public class XMLBooksDataBase extends BooksDataBase {
 				// "serialized xml: " + xmlString);
 				outputStream.write(xmlString.getBytes());
 			} finally {
-				try {
-					outputStream.close();
-				} catch (IOException e) {
-					LogManager.getLogger(getClass()).log(Level.ERROR, "", e);
-				}
+				outputStream.close();
 			}
-		} catch (IOException e) {
-			LogManager.getLogger(getClass()).log(Level.ERROR, "", e);
+		} catch (Exception e) {
+			LogManager.getLogger(getClass()).log(Level.ERROR, "writeListIntoFile", e);
 		}
 
 	}

@@ -34,9 +34,8 @@ public class ListBookPart {
 
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
-		        IStructuredSelection thisSelection = (IStructuredSelection) event
-		                .getSelection();
-		        Book selectedBook = (Book)thisSelection.getFirstElement();
+				IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
+				Book selectedBook = (Book) thisSelection.getFirstElement();
 				eventBroker.post(MyEventConstants.TOPIC_BOOK_SELECTED, selectedBook);
 			}
 		});

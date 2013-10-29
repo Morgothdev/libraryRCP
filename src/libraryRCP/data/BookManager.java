@@ -15,10 +15,11 @@ public class BookManager {
 
 	public static void configure() {
 		Properties properties = new Properties();
-		properties.put("data.access.class", "libraryRCP.data.ClassBooksDataBase");
+		properties.put("data.access.class", "libraryRCP.data.XMLBooksDataBase");
+		properties.put("data.access.filePath", "db.xml");
 		configure(properties);
-		instance.addBook(new Book("Author of First Book","Title of First Book"));
-		instance.addBook(new Book("Author of Second Book","Title of Second Book"));
+		instance.addBook(new Book("Author of First Book", "Title of First Book","2012"));
+		instance.addBook(new Book("Author of Second Book", "Title of Second Book","2011"));
 	}
 
 	public static void configure(Properties properties) throws IllegalArgumentException {

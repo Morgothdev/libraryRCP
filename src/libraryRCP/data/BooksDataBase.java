@@ -7,9 +7,10 @@ import java.util.Set;
 public abstract class BooksDataBase implements Books {
 
 	private Set<OnChangeDataListener> listeners = new HashSet<>();
-	
-	public BooksDataBase(Properties properties){}
-		
+
+	public BooksDataBase(Properties properties) {
+	}
+
 	@Override
 	public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister) {
 		listeners.add(listenerToRegister);
@@ -19,10 +20,10 @@ public abstract class BooksDataBase implements Books {
 	public void removeOnChangeDataListener(Object listenerToRemove) {
 		listeners.remove(listenerToRemove);
 	}
-	
+
 	@Override
-	public void notifyOnChangeDataListeners(){
-		for(OnChangeDataListener listener : listeners){
+	public void notifyOnChangeDataListeners() {
+		for (OnChangeDataListener listener : listeners) {
 			listener.onDataChange();
 		}
 	}

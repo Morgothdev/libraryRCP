@@ -27,13 +27,14 @@ public class ClassBooksDataBase extends BooksDataBase {
 	@Override
 	public synchronized void removeBook(Book bookToDelete) {
 		db.remove(bookToDelete.getId());
-		notifyOnChangeDataListeners();	}
+		notifyOnChangeDataListeners();
+	}
 
 	@Override
 	public void updateBook(Book bookToUpdate) {
 		notifyOnChangeDataListeners();
 	}
-	
+
 	@Override
 	public synchronized Book getBookByID(long bookID) {
 		return db.get(bookID);

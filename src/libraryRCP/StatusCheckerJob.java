@@ -37,16 +37,18 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 
 	private void setDefaultOnStatusChangedListener() {
 		onBookStatusChangeListener = new OnBookStatusChangedListener() {
+
 			@Override
 			public void onChange(Book changedBook) {
 				StringBuilder messageBuilder = new StringBuilder();
-				messageBuilder.append("Status of book id:").append(changedBook.getId()).append("  is canged to ").append(changedBook.getStatus());
-				MessageDialog.openInformation(null, "Book status changed",messageBuilder.toString());
+				messageBuilder.append("Status of book id:").append(changedBook.getId())
+						.append("  is canged to ").append(changedBook.getStatus());
+				MessageDialog.openInformation(null, "Book status changed",
+						messageBuilder.toString());
 			}
 		};
 	}
-	
-	
+
 	public void setOnBookStatusChangeListener(OnBookStatusChangedListener onBookStatusChangeListener) {
 		this.onBookStatusChangeListener = onBookStatusChangeListener;
 	}

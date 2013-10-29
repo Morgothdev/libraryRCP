@@ -22,5 +22,4 @@ public class ListContentProvider implements IStructuredContentProvider {
 		return model.getBooks().toArray();
 	}
 
-	
 }

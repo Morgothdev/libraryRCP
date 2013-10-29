@@ -17,26 +17,25 @@ public class XMLBooksDataBaseTest extends BooksDataBaseTest {
 	protected Book mockedBook;
 	protected Books testedClassBooks;
 	volatile int count = 0;
-	
+
 	protected Books getTestedBooksDataBase() throws IOException {
 		Properties properties = new Properties();
-		String filename = "test"+Integer.toString(count++)+".xml";
+		String filename = "test" + Integer.toString(count++) + ".xml";
 		properties.put("data.access.filePath", filename);
 		(new File(filename)).delete();
 		return new XMLBooksDataBase(properties);
 	}
-	
+
 	@Before
 	public void setUp() throws IOException {
-		mockedBook = new Book(BOOK_AUTHOR,BOOK_TITLE);
+		mockedBook = new Book(BOOK_AUTHOR, BOOK_TITLE, "2000");
 		testedClassBooks = getTestedBooksDataBase();
 		testedClassBooks.addBook(mockedBook);
 	}
 
 	@Test
 	public void testAddBook() {
-		assertEquals(mockedBook,
-				testedClassBooks.getBook(BOOK_AUTHOR, BOOK_TITLE));
+		assertEquals(mockedBook, testedClassBooks.getBook(BOOK_AUTHOR, BOOK_TITLE));
 	}
 
 	@Test
@@ -48,15 +47,14 @@ public class XMLBooksDataBaseTest extends BooksDataBaseTest {
 
 	@Test
 	public void testGetBookByID() {
-		assertEquals(mockedBook,
-				testedClassBooks.getBookByID(mockedBook.getId()));
+		assertEquals(mockedBook, testedClassBooks.getBookByID(mockedBook.getId()));
 	}
 
 	@Test
 	public void testGetBooks() {
-		Book secondBook = new Book("Another Author","Another Title");
+		Book secondBook = new Book("Another Author", "Another Title", "3000");
 		testedClassBooks.addBook(secondBook);
-	
+
 		List<Book> booksList = testedClassBooks.getAllBooks();
 		assertTrue(booksList.contains(mockedBook));
 		assertTrue(booksList.contains(secondBook));
