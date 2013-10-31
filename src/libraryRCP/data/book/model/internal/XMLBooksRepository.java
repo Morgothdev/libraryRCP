@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,58 +37,48 @@ public class XMLBooksRepository extends BooksRepositoryBase {
 			xmlFile.createNewFile();
 		}
 		xStream.setClassLoader(Book.class.getClassLoader());
-		xStream.alias("Library", LinkedList.class);
-		xStream.alias("Book", Book.class);
+		xStream.alias("Library", Map.class);
+		xStream.alias("Book", Entry.class);
+		xStream.alias("book_properties", Book.class);
 	}
 
 	@Override
 	public synchronized void addBook(Book newBook) {
 		long newID = ++maxID;
 		newBook.setId(newID);
-		List<Book> books = read();
-
-		books.add(newBook);
+		Map<Long, Book> books = read();
+		books.put(newID, newBook);
 		System.out.println(books);
 		writeListIntoFile(books);
 		notifyOnChangeDataListeners();
 	}
 
 	@Override
-	public synchronized void removeBook(Book bookToDelete) {
-		List<Book> readedList = read();
-		readedList.remove(bookToDelete);
+	public synchronized void removeBook(long bookID) {
+		Map<Long, Book> readedList = read();
+		readedList.remove(bookID);
 		writeListIntoFile(readedList);
 		notifyOnChangeDataListeners();
 	}
 
 	@Override
 	public void updateBook(Book bookToUpdate) {
-		List<Book> readedList = read();
-		for (Book book : readedList) {
-			if (book.getId() == bookToUpdate.getId()) {
-				readedList.remove(book);
-				readedList.add(bookToUpdate);
-			}
-		}
+		Map<Long, Book> readedList = read();
+		readedList.put(bookToUpdate.getId(), bookToUpdate);
 		writeListIntoFile(readedList);
 		notifyOnChangeDataListeners();
 	}
 
 	@Override
 	public synchronized Book getBookByID(long bookID) {
-		List<Book> readedList = read();
-		for (Book book : readedList) {
-			if (book.getId() == bookID) {
-				return book;
-			}
-		}
-		return null;
+		Map<Long, Book> readedList = read();
+		return readedList.get(bookID);
 	}
 
 	@Override
 	public synchronized Book getBook(String author, String title) {
-		List<Book> readedList = read();
-		for (Book book : readedList) {
+		Map<Long, Book> readedList = read();
+		for (Book book : readedList.values()) {
 			if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
 				return book;
 			}
@@ -95,12 +88,12 @@ public class XMLBooksRepository extends BooksRepositoryBase {
 
 	@Override
 	public synchronized List<Book> getAllBooks() {
-		return (List<Book>) read();
+		return new LinkedList<Book>(read().values());
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private List<Book> read() {
-		List<Book> readedList;
+	private Map<Long, Book> read() {
+		Map<Long, Book> readedList;
 		FileInputStream fileInputStream;
 		try {
 			fileInputStream = new FileInputStream(xmlFile);
@@ -109,9 +102,9 @@ public class XMLBooksRepository extends BooksRepositoryBase {
 				byte[] readed = new byte[100000];
 				fileInputStream.read(readed);
 				System.out.println(readed.length + " znaków: \"" + (new String(readed)) + "\"");
-				readedList = (List) xStream.fromXML(new String(readed));
+				readedList = (Map) xStream.fromXML(new String(readed));
 				maxID = 0;
-				for (Book book : readedList) {
+				for (Book book : readedList.values()) {
 					if (book.getId() >= maxID) {
 						++maxID;
 					}
@@ -122,11 +115,11 @@ public class XMLBooksRepository extends BooksRepositoryBase {
 			}
 		} catch (Exception e) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "read", e);
-			return new LinkedList<Book>();
+			return new HashMap<Long, Book>();
 		}
 	}
 
-	private void writeListIntoFile(List<Book> listToWrite) {
+	private void writeListIntoFile(Map<Long, Book> listToWrite) {
 		FileOutputStream outputStream = null;
 		try {
 			outputStream = new FileOutputStream(xmlFile, false);

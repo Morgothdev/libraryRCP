@@ -18,15 +18,16 @@ public abstract class BooksRepositoryBase implements BookRepository {
 
 	private Set<OnChangeDataListener> listeners = new HashSet<>();
 
-	@Inject
-	private IEventBroker eventBroker;
-
 	public BooksRepositoryBase(Properties properties) {
 	}
 
 	@Override
 	public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister) {
-		listeners.add(listenerToRegister);
+		if (listenerToRegister == null) {
+			System.out.println("rejestrowanie nulla jako listenera");
+		} else {
+			listeners.add(listenerToRegister);
+		}
 	}
 
 	@Override
@@ -39,6 +40,5 @@ public abstract class BooksRepositoryBase implements BookRepository {
 		for (OnChangeDataListener listener : listeners) {
 			listener.onDataChange();
 		}
-		eventBroker.post(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED, new Object());
 	}
 }

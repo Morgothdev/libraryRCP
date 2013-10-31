@@ -5,16 +5,15 @@ import org.eclipse.jface.viewers.Viewer;
 
 public class ListContentProvider implements IStructuredContentProvider {
 
-	private BookModel model = new BookModel();
+	private BookModel model;
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		// TODO Auto-generated method stub
+		this.model=(BookModel)newInput;
 	}
 
 	@Override

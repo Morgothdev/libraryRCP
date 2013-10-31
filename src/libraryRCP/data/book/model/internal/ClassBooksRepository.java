@@ -27,8 +27,8 @@ public class ClassBooksRepository extends BooksRepositoryBase {
 	}
 
 	@Override
-	public synchronized void removeBook(Book bookToDelete) {
-		db.remove(bookToDelete.getId());
+	public synchronized void removeBook(long bookID) {
+		db.remove(bookID);
 		notifyOnChangeDataListeners();
 	}
 

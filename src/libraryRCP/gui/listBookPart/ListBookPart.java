@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import libraryRCP.data.book.model.Book;
 import libraryRCP.gui.MyEventConstants;
 
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
@@ -24,6 +26,8 @@ public class ListBookPart {
 
 	@Inject
 	private IEventBroker eventBroker;
+	@Inject
+	private IEclipseContext eclipseContext;
 
 	@PostConstruct
 	@Inject
@@ -31,7 +35,8 @@ public class ListBookPart {
 		viewer = new ListViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new ListContentProvider());
 		viewer.setLabelProvider(new ListItemBooksLabelProvider());
-		viewer.setInput(new BookModel());
+		BookModel bookModel =ContextInjectionFactory.make(BookModel.class, eclipseContext);
+		viewer.setInput(bookModel);
 
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 
@@ -52,7 +57,8 @@ public class ListBookPart {
 	@Inject
 	@Optional
 	private void getNotified(
-			@UIEventTopic(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED) Book selectedBook) {
+			@UIEventTopic(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED) Object object) {
+		System.out.println("notified");
 		viewer.refresh();
 	}
 }

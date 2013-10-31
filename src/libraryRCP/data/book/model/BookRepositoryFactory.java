@@ -4,7 +4,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+import libraryRCP.MyBundleActivator;
+import libraryRCP.MyWorkspaceFilesRepositor;
+
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 
 public class BookRepositoryFactory {
@@ -17,16 +21,16 @@ public class BookRepositoryFactory {
 
 	public static void configure(Properties properties) throws IllegalArgumentException {
 		String className = properties.getProperty("data.access.class");
-		System.out.println(className);
-		if (className == null) {
+		System.out.println("class from properties " + className);
+		if (className != null) {
 			try {
 				Class<?> classType = Class.forName(className);
 				Constructor<?> constructor = classType.getConstructor(Properties.class);
 				instance = (BookRepository) constructor.newInstance(properties);
-				ContextInjectionFactory.inject(instance, eclipseContext);
 			} catch (InstantiationException | IllegalAccessException | InvocationTargetException
 					| NoSuchMethodException | SecurityException | ClassNotFoundException
 					| NullPointerException e) {
+				System.out.println("error " + e);
 				throw new IllegalArgumentException(e);
 			}
 		}
@@ -37,9 +41,5 @@ public class BookRepositoryFactory {
 			throw new FactoryNotConfiguredException();
 		}
 		return instance;
-	}
-
-	public static void setEclipseContext(IEclipseContext eclipseContext) {
-		BookRepositoryFactory.eclipseContext = eclipseContext;
 	}
 }

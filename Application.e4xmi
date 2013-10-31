@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_O-oOgD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ide.application" bindingContexts="_O-o1kD_MEeOrC_Dv1DZ4vA">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_O-oOgD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ide.application" bindingContexts="_O-o1kD_MEeOrC_Dv1DZ4vA">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_O-oOgT_MEeOrC_Dv1DZ4vA" label="LibraryRCP" x="100" y="100" width="800" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_upOGED_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_vC5KUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspective.0">
         <children xsi:type="basic:PartSashContainer" xmi:id="_v4wbUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.0" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_3OMX0D_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.0">
-            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List"/>
+            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List">
+              <menus xsi:type="menu:PopupMenu" xmi:id="_1SEUcEJiEeOzUrcSEvtKuA" elementId="libraryrcp.popupmenu.0" label="Menuds">
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_2Fi_0EJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.delete" label="Delete" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_59SGYEJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.changeStatus" label="ChangeStatus"/>
+              </menus>
+              <menus xmi:id="_ZbRXQEJjEeOzUrcSEvtKuA" elementId="libraryrcp.menu.0">
+                <tags>ViewMenu</tags>
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_aay6kEJjEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.0" label="DElete" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
+              </menus>
+            </children>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1">
             <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1">
@@ -19,10 +28,12 @@
       </children>
     </children>
   </children>
+  <handlers xmi:id="_T3IykEJeEeOzUrcSEvtKuA" elementId="libraryrcp.handlers.book.delete" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.DeleteBookHandler"/>
   <rootContext xmi:id="_O-o1kD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_O-o1kT_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_O-o1kj_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
+  <commands xmi:id="_sJIaAEJiEeOzUrcSEvtKuA" elementId="libraryRCP.commands.book.delete" commandName="DeleteBook"/>
   <addons xmi:id="_O-oOgj_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_O-oOgz_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_O-oOhD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
