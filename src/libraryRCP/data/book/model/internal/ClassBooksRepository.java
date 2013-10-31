@@ -1,4 +1,4 @@
-package libraryRCP.data;
+package libraryRCP.data.book.model.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,12 +7,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-public class ClassBooksDataBase extends BooksDataBase {
+import libraryRCP.data.book.model.Book;
+
+public class ClassBooksRepository extends BooksRepositoryBase {
 
 	private Map<Long, Book> db = new HashMap<Long, Book>();
 	long maxID = 0;
 
-	public ClassBooksDataBase(Properties properties) {
+	public ClassBooksRepository(Properties properties) {
 		super(properties);
 	}
 

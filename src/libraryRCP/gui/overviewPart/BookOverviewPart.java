@@ -3,13 +3,15 @@ package libraryRCP.gui.overviewPart;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
-import libraryRCP.data.Book;
+import libraryRCP.data.book.model.Book;
+import libraryRCP.data.book.model.BookRepositoryFactory;
 import libraryRCP.gui.MyEventConstants;
 
-import org.apache.logging.log4j.LogManager;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
@@ -40,6 +42,11 @@ public class BookOverviewPart {
 		label.setText("Title:");
 		titleLabel = new Label(parent, SWT.None);
 
+		// BundleActivatorImpl bundleActivator =
+		// BundleActivatorImpl.getInstance();
+
+		titleLabel.setText(Platform.getLocation().toFile().getAbsolutePath());
+
 		label = new Label(parent, SWT.None);
 		label.setText("Author:");
 		authorLabel = new Label(parent, SWT.None);
@@ -64,13 +71,15 @@ public class BookOverviewPart {
 
 	@Focus
 	public void onFocus() {
+		authorLabel.setText((BookRepositoryFactory.getInstance() != null) ? BookRepositoryFactory
+				.getInstance().getClass().getName() : "NULL");
 
 	}
 
 	@Inject
 	@Optional
 	private void getNotified(@UIEventTopic(MyEventConstants.TOPIC_BOOK_SELECTED) Book selectedBook) {
-		LogManager.getLogger(getClass()).info("selected {}", selectedBook.getId());
+		Logger.getLogger(getClass().getName()).info("selected " + selectedBook.getId());
 		titleLabel.setText(selectedBook.getTitle());
 		authorLabel.setText(selectedBook.getAuthor());
 		statusLabel.setText(selectedBook.getStatus().name().toLowerCase());

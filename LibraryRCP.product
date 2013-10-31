@@ -25,10 +25,8 @@
 
    <plugins>
       <plugin id="LibraryRCP"/>
-      <plugin id="Log4j2Fragment" fragment="true"/>
-      <plugin id="Log4j2Plugin"/>
-      <plugin id="XStream"/>
       <plugin id="XStreamFragment" fragment="true"/>
+      <plugin id="XStreamPlugin"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>

@@ -3,11 +3,13 @@ package libraryRCP.gui.listBookPart;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import libraryRCP.data.Book;
+import libraryRCP.data.book.model.Book;
 import libraryRCP.gui.MyEventConstants;
 
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -24,6 +26,7 @@ public class ListBookPart {
 	private IEventBroker eventBroker;
 
 	@PostConstruct
+	@Inject
 	public void createPartControl(Composite parent) {
 		viewer = new ListViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new ListContentProvider());
@@ -44,5 +47,12 @@ public class ListBookPart {
 	@Focus
 	public void setFocus() {
 		viewer.getControl().setFocus();
+	}
+
+	@Inject
+	@Optional
+	private void getNotified(
+			@UIEventTopic(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED) Book selectedBook) {
+		viewer.refresh();
 	}
 }

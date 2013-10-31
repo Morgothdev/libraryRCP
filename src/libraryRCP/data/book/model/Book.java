@@ -1,27 +1,35 @@
-package libraryRCP.data;
+package libraryRCP.data.book.model;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Book {
 
 	public enum STATUS {
 		ORDERED, LOANED, AVAIBLE;
 	}
 
+	@XmlElement
 	private long id;
-
+	@XmlElement
 	private String author;
+	@XmlElement
 	private String title;
-
+	@XmlElement
 	private Book.STATUS status;
+	@XmlElement
 	private Date loanedDate;
+	@XmlElement
 	private Date dateOfReturn;
-
+	@XmlElement
 	private Integer yearOfPublication;
 
-	public Book(){
+	public Book() {
 	}
-	
+
 	public Book(String author, String title, String yearOfPublication) {
 		this.author = author;
 		this.title = title;

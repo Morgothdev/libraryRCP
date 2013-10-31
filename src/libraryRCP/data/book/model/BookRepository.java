@@ -1,8 +1,10 @@
-package libraryRCP.data;
+package libraryRCP.data.book.model;
 
 import java.util.List;
 
-public interface Books {
+import libraryRCP.data.OnChangeDataListener;
+
+public interface BookRepository {
 
 	public void addBook(Book newBook);
 

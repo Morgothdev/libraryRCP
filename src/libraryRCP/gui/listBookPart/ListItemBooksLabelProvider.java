@@ -1,6 +1,6 @@
 package libraryRCP.gui.listBookPart;
 
-import libraryRCP.data.Book;
+import libraryRCP.data.book.model.Book;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;

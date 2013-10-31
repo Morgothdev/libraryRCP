@@ -2,14 +2,12 @@ package libraryRCP;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
-import libraryRCP.data.Book;
-import libraryRCP.data.Books;
 import libraryRCP.data.OnChangeDataListener;
-import libraryRCP.data.Book.STATUS;
+import libraryRCP.data.book.model.Book;
+import libraryRCP.data.book.model.BookRepository;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -18,11 +16,11 @@ import org.eclipse.jface.dialogs.MessageDialog;
 
 public class StatusCheckerJob extends Job implements OnChangeDataListener {
 
-	private Books books;
+	private BookRepository books;
 	private Map<Long, Book.STATUS> mapOfBookStatuses = new HashMap<>();
 	private OnBookStatusChangedListener onBookStatusChangeListener;
 
-	public StatusCheckerJob(String name, Books booksInstance) {
+	public StatusCheckerJob(String name, BookRepository booksInstance) {
 		super(name);
 		books = booksInstance;
 		loadMapOfStatuses();
@@ -60,8 +58,7 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 
 	@Override
 	protected synchronized IStatus run(IProgressMonitor monitor) {
-		Logger log = LogManager.getLogger(getClass());
-		log.entry();
+		Logger log = Logger.getLogger(getClass().getName());
 		try {
 			for (Book book : books.getAllBooks()) {
 				Book.STATUS previousStatus = mapOfBookStatuses.get(book.getId());
@@ -69,7 +66,7 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 				if (actualStatus != previousStatus) {
 					mapOfBookStatuses.put(book.getId(), book.getStatus());
 					whenBookStatusChanged(book);
-					log.info("Status of book {} changed to {}", book.getId(), book.getStatus());
+					log.info("Status of book " + book.getId() + " changed to " + book.getStatus());
 				}
 			}
 			return Status.OK_STATUS;

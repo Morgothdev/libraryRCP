@@ -1,6 +1,6 @@
 package libraryRCP;
 
-import libraryRCP.data.Book;
+import libraryRCP.data.book.model.Book;
 
 public interface OnBookStatusChangedListener {
 
