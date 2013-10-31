@@ -18,7 +18,9 @@
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1">
             <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1">
-              <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book"/>
+              <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book">
+                <handlers xmi:id="_Sbu60EJ6EeOEY_y4pkLcHg" elementId="libraryrcp.handler.books.add" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.AddBookHandler" command="_MN1OIEJ6EeOEY_y4pkLcHg"/>
+              </children>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2">
               <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview"/>
@@ -28,12 +30,13 @@
       </children>
     </children>
   </children>
-  <handlers xmi:id="_T3IykEJeEeOzUrcSEvtKuA" elementId="libraryrcp.handlers.book.delete" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.DeleteBookHandler"/>
+  <handlers xmi:id="_T3IykEJeEeOzUrcSEvtKuA" elementId="libraryrcp.handlers.book.delete" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.DeleteBookHandler" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
   <rootContext xmi:id="_O-o1kD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_O-o1kT_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_O-o1kj_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
   <commands xmi:id="_sJIaAEJiEeOzUrcSEvtKuA" elementId="libraryRCP.commands.book.delete" commandName="DeleteBook"/>
+  <commands xmi:id="_MN1OIEJ6EeOEY_y4pkLcHg" elementId="libraryrcp.command.books.add" commandName="Add Book"/>
   <addons xmi:id="_O-oOgj_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_O-oOgz_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_O-oOhD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

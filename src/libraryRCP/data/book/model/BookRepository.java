@@ -8,7 +8,7 @@ public interface BookRepository {
 
 	public void addBook(Book newBook);
 
-	public void removeBook(long l);
+	public void removeBook(Book bookToRemove);
 
 	public Book getBookByID(long bookID);
 
@@ -22,5 +22,5 @@ public interface BookRepository {
 
 	public void removeOnChangeDataListener(Object listenerToRemove);
 
-	public void notifyOnChangeDataListeners();
+	public void notifyOnChangeDataListeners(Book changedBook);
 }

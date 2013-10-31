@@ -57,7 +57,7 @@ public class ListBookPart {
 	@Inject
 	@Optional
 	private void getNotified(
-			@UIEventTopic(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED) Object object) {
+			@UIEventTopic(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED) Book book) {
 		System.out.println("notified");
 		viewer.refresh();
 	}

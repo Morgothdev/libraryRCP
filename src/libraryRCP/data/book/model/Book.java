@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Book {
 
+	public static final String TITLE_ID= Book.class.getName()+".title";
+	public static final String AUTHOR_ID= Book.class.getName()+".author";
+	public static final String YEAR_OF_PUBLICATION_ID= Book.class.getName()+".year";
+	
+	
 	public enum STATUS {
 		ORDERED, LOANED, AVAIBLE;
 	}
@@ -30,7 +35,7 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String author, String title, String yearOfPublication) {
+	public Book(String author, String title, String yearOfPublication) throws NumberFormatException {
 		this.author = author;
 		this.title = title;
 		this.yearOfPublication = Integer.parseInt(yearOfPublication);

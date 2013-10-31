@@ -23,18 +23,18 @@ public class ClassBooksRepository extends BooksRepositoryBase {
 		long bookID = maxID++;
 		newBook.setId(bookID);
 		db.put(bookID, newBook);
-		notifyOnChangeDataListeners();
+		notifyOnChangeDataListeners(null);
 	}
 
 	@Override
-	public synchronized void removeBook(long bookID) {
-		db.remove(bookID);
-		notifyOnChangeDataListeners();
+	public synchronized void removeBook(Book bookToRemove) {
+		db.remove(bookToRemove.getId());
+		notifyOnChangeDataListeners(null);
 	}
 
 	@Override
 	public void updateBook(Book bookToUpdate) {
-		notifyOnChangeDataListeners();
+		notifyOnChangeDataListeners(null);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import libraryRCP.data.OnChangeDataListener;
+import libraryRCP.data.book.model.Book;
 import libraryRCP.data.book.model.BookRepository;
 import libraryRCP.gui.MyEventConstants;
 
@@ -36,9 +37,9 @@ public abstract class BooksRepositoryBase implements BookRepository {
 	}
 
 	@Override
-	public void notifyOnChangeDataListeners() {
+	public void notifyOnChangeDataListeners(Book changedBook) {
 		for (OnChangeDataListener listener : listeners) {
-			listener.onDataChange();
+			listener.onDataChange(changedBook);
 		}
 	}
 }

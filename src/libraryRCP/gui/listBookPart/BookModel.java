@@ -29,7 +29,7 @@ public class BookModel implements OnChangeDataListener {
 	}
 
 	@Override
-	public void onDataChange() {
+	public void onDataChange(Book changedBook) {
 		eventBroker.post(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED, new Object());
 	}
 }

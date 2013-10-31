@@ -52,7 +52,7 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 	}
 
 	@Override
-	public synchronized void onDataChange() {
+	public synchronized void onDataChange(Book changedBook) {
 		loadMapOfStatuses();
 	}
 

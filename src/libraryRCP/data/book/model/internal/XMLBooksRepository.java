@@ -48,25 +48,24 @@ public class XMLBooksRepository extends BooksRepositoryBase {
 		newBook.setId(newID);
 		Map<Long, Book> books = read();
 		books.put(newID, newBook);
-		System.out.println(books);
 		writeListIntoFile(books);
-		notifyOnChangeDataListeners();
+		notifyOnChangeDataListeners(null);
 	}
 
 	@Override
-	public synchronized void removeBook(long bookID) {
-		Map<Long, Book> readedList = read();
-		readedList.remove(bookID);
-		writeListIntoFile(readedList);
-		notifyOnChangeDataListeners();
+	public synchronized void removeBook(Book bookToRemove) {
+		Map<Long, Book> readedMap = read();
+		readedMap.remove(bookToRemove.getId());
+		writeListIntoFile(readedMap);
+		notifyOnChangeDataListeners(null);
 	}
 
 	@Override
 	public void updateBook(Book bookToUpdate) {
-		Map<Long, Book> readedList = read();
-		readedList.put(bookToUpdate.getId(), bookToUpdate);
-		writeListIntoFile(readedList);
-		notifyOnChangeDataListeners();
+		Map<Long, Book> readedMap = read();
+		readedMap.put(bookToUpdate.getId(), bookToUpdate);
+		writeListIntoFile(readedMap);
+		notifyOnChangeDataListeners(bookToUpdate);
 	}
 
 	@Override

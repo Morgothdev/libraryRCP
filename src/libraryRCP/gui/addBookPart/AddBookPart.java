@@ -5,12 +5,18 @@ import javax.inject.Inject;
 import libraryRCP.data.book.model.Book;
 import libraryRCP.data.book.model.BookRepositoryFactory;
 
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.commands.ParameterizedCommand;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DragDetectEvent;
-import org.eclipse.swt.events.DragDetectListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -32,8 +38,20 @@ public class AddBookPart {
 	@Inject
 	private MDirtyable dirty;
 
+	private Composite parent;
+
+	@Inject
+	private MContext mContext;
+
+	@Inject
+	private EHandlerService handlerService;
+
+	@Inject
+	private ECommandService commandService;
+
 	@Inject
 	public AddBookPart(Composite parent) {
+		this.parent = parent;
 		GridLayout layout = new GridLayout(2, false);
 		parent.setLayout(layout);
 
@@ -84,10 +102,16 @@ public class AddBookPart {
 
 	@Persist
 	public void save() {
-		Book newBook = new Book(authorInput.getText(), titleInput.getText(),
-				yearOfPublicationInput.getText());
-		BookRepositoryFactory.getInstance().addBook(newBook);
-		dirty.setDirty(false);
+		Book newBook;
+		try {
+			newBook = new Book(authorInput.getText(), titleInput.getText(),
+					yearOfPublicationInput.getText());
+			BookRepositoryFactory.getInstance().addBook(newBook);
+			dirty.setDirty(false);
+		} catch (NumberFormatException e) {
+			MessageDialog.openError(parent.getShell(), "Couldn't add new book",
+					"Illegal value in Year field");
+		}
 	}
 
 }
