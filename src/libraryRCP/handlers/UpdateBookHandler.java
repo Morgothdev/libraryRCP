@@ -13,27 +13,27 @@ import org.eclipse.e4.ui.di.UIEventTopic;
 
 public class UpdateBookHandler {
 
-	@Execute
-	public void execute(Book bookToUpdate) {
-		updateBook(bookToUpdate);
-	}
+    @Execute
+    public void execute(Book bookToUpdate) {
+        updateBook(bookToUpdate);
+    }
 
-	@CanExecute
-	public boolean canExecute(Book bookToUpdate) {
-		System.out.println("can update execute: " + bookToUpdate != null);
-		return bookToUpdate != null;
-	}
+    @CanExecute
+    public boolean canExecute(Book bookToUpdate) {
+        System.out.println("can update execute: " + bookToUpdate != null);
+        return bookToUpdate != null;
+    }
 
-	@Inject
-	@Optional
-	public void getNotified(@UIEventTopic(MyEventConstants.TOPIC_BOOK_UPDATE) Book bookToUpdate) {
-		updateBook(bookToUpdate);
-	}
+    @Inject
+    @Optional
+    public void getNotified(@UIEventTopic(MyEventConstants.TOPIC_BOOK_UPDATE) Book bookToUpdate) {
+        updateBook(bookToUpdate);
+    }
 
-	private void updateBook(Book bookToUpdate) {
-		// TODO logger
-		System.out.println("I'm updatingBook book " + bookToUpdate);
-		BookRepositoryFactory.getInstance().updateBook(bookToUpdate);
-	}
+    private void updateBook(Book bookToUpdate) {
+        // TODO logger
+        System.out.println("I'm updatingBook book " + bookToUpdate);
+        BookRepositoryFactory.getInstance().updateBook(bookToUpdate);
+    }
 
 }

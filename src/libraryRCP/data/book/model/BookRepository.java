@@ -6,21 +6,21 @@ import libraryRCP.data.OnChangeDataListener;
 
 public interface BookRepository {
 
-	public void addBook(Book newBook);
+    public void addBook(Book newBook);
 
-	public void removeBook(Book bookToRemove);
+    public void removeBook(Book bookToRemove);
 
-	public Book getBookByID(long bookID);
+    public Book getBookByID(long bookID);
 
-	public Book getBook(String author, String title);
+    public Book getBook(String author, String title);
 
-	public List<Book> getAllBooks();
+    public List<Book> getAllBooks();
 
-	public void updateBook(Book bookToUpdate);
+    public void updateBook(Book bookToUpdate);
 
-	public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister);
+    public void registerOnChangeDataListener(OnChangeDataListener listenerToRegister);
 
-	public void removeOnChangeDataListener(Object listenerToRemove);
+    public void removeOnChangeDataListener(Object listenerToRemove);
 
-	public void notifyOnChangeDataListeners(Book changedBook);
+    public void notifyOnChangeDataListeners(Book changedBook);
 }

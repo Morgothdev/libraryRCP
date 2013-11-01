@@ -4,6 +4,6 @@ import libraryRCP.data.book.model.Book;
 
 public interface OnChangeDataListener {
 
-	public void onDataChange(Book changedBook);
+    public void onDataChange(Book changedBook);
 
 }

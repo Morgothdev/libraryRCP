@@ -15,20 +15,19 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 
 public class BookModel implements OnChangeDataListener {
 
-	@Inject
-	private IEventBroker eventBroker;
+    @Inject private IEventBroker eventBroker;
 
-	public List<Book> getBooks() {
-		List<Book> books = new LinkedList<>();
-		BookRepository repository = BookRepositoryFactory.getInstance();
-		repository.registerOnChangeDataListener(this);
-		books = repository.getAllBooks();
+    public List<Book> getBooks() {
+        List<Book> books = new LinkedList<>();
+        BookRepository repository = BookRepositoryFactory.getInstance();
+        repository.registerOnChangeDataListener(this);
+        books = repository.getAllBooks();
 
-		return books;
-	}
+        return books;
+    }
 
-	@Override
-	public void onDataChange(Book changedBook) {
-		eventBroker.post(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED, changedBook);
-	}
+    @Override
+    public void onDataChange(Book changedBook) {
+        eventBroker.post(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED, changedBook);
+    }
 }

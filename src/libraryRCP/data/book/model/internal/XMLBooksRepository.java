@@ -23,115 +23,115 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 public class XMLBooksRepository extends BooksRepositoryBase {
 
-	private long maxID = 0;
-	private XStream xStream = new XStream(new StaxDriver());
-	private File xmlFile;
+    private long maxID = 0;
+    private XStream xStream = new XStream(new StaxDriver());
+    private File xmlFile;
 
-	public XMLBooksRepository(Properties properties) throws IOException {
-		super(properties);
-		String pathname = (String) properties.get("data.access.filePath");
-		System.out.println("pathname: " + pathname);
-		IPath dataLocation = MyWorkspaceFilesRepositor.getDataLocation();
-		xmlFile = dataLocation.append(pathname).toFile();
-		if (!xmlFile.exists()) {
-			xmlFile.createNewFile();
-		}
-		xStream.setClassLoader(Book.class.getClassLoader());
-		xStream.alias("Library", Map.class);
-		xStream.alias("Book", Entry.class);
-		xStream.alias("book_properties", Book.class);
-	}
+    public XMLBooksRepository(Properties properties) throws IOException {
+        super(properties);
+        String pathname = (String) properties.get("data.access.filePath");
+        System.out.println("pathname: " + pathname);
+        IPath dataLocation = MyWorkspaceFilesRepositor.getDataLocation();
+        xmlFile = dataLocation.append(pathname).toFile();
+        if (!xmlFile.exists()) {
+            xmlFile.createNewFile();
+        }
+        xStream.setClassLoader(Book.class.getClassLoader());
+        xStream.alias("Library", Map.class);
+        xStream.alias("Book", Entry.class);
+        xStream.alias("book_properties", Book.class);
+    }
 
-	@Override
-	public synchronized void addBook(Book newBook) {
-		long newID = ++maxID;
-		newBook.setId(newID);
-		Map<Long, Book> books = read();
-		books.put(newID, newBook);
-		writeListIntoFile(books);
-		notifyOnChangeDataListeners(null);
-	}
+    @Override
+    public synchronized void addBook(Book newBook) {
+        long newID = ++maxID;
+        newBook.setId(newID);
+        Map<Long, Book> books = read();
+        books.put(newID, newBook);
+        writeListIntoFile(books);
+        notifyOnChangeDataListeners(null);
+    }
 
-	@Override
-	public synchronized void removeBook(Book bookToRemove) {
-		Map<Long, Book> readedMap = read();
-		readedMap.remove(bookToRemove.getId());
-		writeListIntoFile(readedMap);
-		notifyOnChangeDataListeners(null);
-	}
+    @Override
+    public synchronized void removeBook(Book bookToRemove) {
+        Map<Long, Book> readedMap = read();
+        readedMap.remove(bookToRemove.getId());
+        writeListIntoFile(readedMap);
+        notifyOnChangeDataListeners(null);
+    }
 
-	@Override
-	public void updateBook(Book bookToUpdate) {
-		Map<Long, Book> readedMap = read();
-		readedMap.put(bookToUpdate.getId(), bookToUpdate);
-		writeListIntoFile(readedMap);
-		notifyOnChangeDataListeners(bookToUpdate);
-	}
+    @Override
+    public void updateBook(Book bookToUpdate) {
+        Map<Long, Book> readedMap = read();
+        readedMap.put(bookToUpdate.getId(), bookToUpdate);
+        writeListIntoFile(readedMap);
+        notifyOnChangeDataListeners(bookToUpdate);
+    }
 
-	@Override
-	public synchronized Book getBookByID(long bookID) {
-		Map<Long, Book> readedList = read();
-		return readedList.get(bookID);
-	}
+    @Override
+    public synchronized Book getBookByID(long bookID) {
+        Map<Long, Book> readedList = read();
+        return readedList.get(bookID);
+    }
 
-	@Override
-	public synchronized Book getBook(String author, String title) {
-		Map<Long, Book> readedList = read();
-		for (Book book : readedList.values()) {
-			if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
-				return book;
-			}
-		}
-		return null;
-	}
+    @Override
+    public synchronized Book getBook(String author, String title) {
+        Map<Long, Book> readedList = read();
+        for (Book book : readedList.values()) {
+            if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
+                return book;
+            }
+        }
+        return null;
+    }
 
-	@Override
-	public synchronized List<Book> getAllBooks() {
-		return new LinkedList<Book>(read().values());
-	}
+    @Override
+    public synchronized List<Book> getAllBooks() {
+        return new LinkedList<Book>(read().values());
+    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private Map<Long, Book> read() {
-		Map<Long, Book> readedList;
-		FileInputStream fileInputStream;
-		try {
-			fileInputStream = new FileInputStream(xmlFile);
-			try {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private Map<Long, Book> read() {
+        Map<Long, Book> readedList;
+        FileInputStream fileInputStream;
+        try {
+            fileInputStream = new FileInputStream(xmlFile);
+            try {
 
-				byte[] readed = new byte[100000];
-				fileInputStream.read(readed);
-				readedList = (Map) xStream.fromXML(new String(readed));
-				maxID = 0;
-				for (Book book : readedList.values()) {
-					if (book.getId() >= maxID) {
-						++maxID;
-					}
-				}
-				return readedList;
-			} finally {
-				fileInputStream.close();
-			}
-		} catch (Exception e) {
-			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "read", e);
-			return new HashMap<Long, Book>();
-		}
-	}
+                byte[] readed = new byte[100000];
+                fileInputStream.read(readed);
+                readedList = (Map) xStream.fromXML(new String(readed));
+                maxID = 0;
+                for (Book book : readedList.values()) {
+                    if (book.getId() >= maxID) {
+                        ++maxID;
+                    }
+                }
+                return readedList;
+            } finally {
+                fileInputStream.close();
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "read", e);
+            return new HashMap<Long, Book>();
+        }
+    }
 
-	private void writeListIntoFile(Map<Long, Book> listToWrite) {
-		FileOutputStream outputStream = null;
-		try {
-			outputStream = new FileOutputStream(xmlFile, false);
-			try {
-				String xmlString = xStream.toXML(listToWrite);
-				// LogManager.getLogger(getClass()).log(Level.ERROR,
-				// "serialized xml: " + xmlString);
-				outputStream.write(xmlString.getBytes());
-			} finally {
-				outputStream.close();
-			}
-		} catch (Exception e) {
-			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "writeListIntoFile", e);
-		}
+    private void writeListIntoFile(Map<Long, Book> listToWrite) {
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(xmlFile, false);
+            try {
+                String xmlString = xStream.toXML(listToWrite);
+                // LogManager.getLogger(getClass()).log(Level.ERROR,
+                // "serialized xml: " + xmlString);
+                outputStream.write(xmlString.getBytes());
+            } finally {
+                outputStream.close();
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "writeListIntoFile", e);
+        }
 
-	}
+    }
 }

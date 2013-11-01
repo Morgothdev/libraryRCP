@@ -7,13 +7,13 @@ import org.eclipse.swt.graphics.Image;
 
 public class ListItemBooksLabelProvider extends LabelProvider {
 
-	@Override
-	public String getText(Object element) {
-		return ((Book) element).getAuthor() + ", " + ((Book) element).getTitle();
-	}
+    @Override
+    public String getText(Object element) {
+        return ((Book) element).getAuthor() + ", " + ((Book) element).getTitle();
+    }
 
-	@Override
-	public Image getImage(Object element) {
-		return null;
-	}
+    @Override
+    public Image getImage(Object element) {
+        return null;
+    }
 }

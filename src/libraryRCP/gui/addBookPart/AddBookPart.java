@@ -23,86 +23,84 @@ import org.eclipse.swt.widgets.Text;
 
 public class AddBookPart {
 
-	public static final String ID = "libraryRCP.gui.addBookPart.AddBookPart.class";
+    public static final String ID = "libraryRCP.gui.addBookPart.AddBookPart.class";
 
-	private Text titleInput;
-	private Text authorInput;
-	private Text yearOfPublicationInput;
+    private Text titleInput;
+    private Text authorInput;
+    private Text yearOfPublicationInput;
 
-	@Inject
-	private MDirtyable dirty;
+    @Inject private MDirtyable dirty;
 
-	private Composite parent;
+    private Composite parent;
 
-	@Inject
-	public AddBookPart(Composite parent) {
-		this.parent = parent;
-		GridLayout layout = new GridLayout(2, false);
-		parent.setLayout(layout);
+    @Inject
+    public AddBookPart(Composite parent) {
+        this.parent = parent;
+        GridLayout layout = new GridLayout(2, false);
+        parent.setLayout(layout);
 
-		Label label;
-		ModifyListener dirtyMaker = new ModifyListener() {
+        Label label;
+        ModifyListener dirtyMaker = new ModifyListener() {
 
-			@Override
-			public void modifyText(ModifyEvent e) {
-				dirty.setDirty(true);
-			}
-		};
-		GridData gd = new GridData();
-		gd.grabExcessHorizontalSpace=true;
-		gd.horizontalAlignment = SWT.FILL;
-		
-		label = new Label(parent, SWT.None);
-		label.setText("Title:");
-		titleInput = new Text(parent, SWT.None);
-		titleInput.setLayoutData(gd);
-		titleInput.addModifyListener(dirtyMaker);
+            @Override
+            public void modifyText(ModifyEvent e) {
+                dirty.setDirty(true);
+            }
+        };
+        GridData gd = new GridData();
+        gd.grabExcessHorizontalSpace = true;
+        gd.horizontalAlignment = SWT.FILL;
 
+        label = new Label(parent, SWT.None);
+        label.setText("Title:");
+        titleInput = new Text(parent, SWT.None);
+        titleInput.setLayoutData(gd);
+        titleInput.addModifyListener(dirtyMaker);
 
-		label = new Label(parent, SWT.None);
-		label.setText("Author:");
-		authorInput = new Text(parent, SWT.FILL);
-		authorInput.setLayoutData(gd);
-		authorInput.addModifyListener(dirtyMaker);
+        label = new Label(parent, SWT.None);
+        label.setText("Author:");
+        authorInput = new Text(parent, SWT.FILL);
+        authorInput.setLayoutData(gd);
+        authorInput.addModifyListener(dirtyMaker);
 
-		label = new Label(parent, SWT.None);
-		label.setText("Year of publication:");
-		yearOfPublicationInput = new Text(parent, SWT.None);
-		yearOfPublicationInput.setLayoutData(gd);
-		yearOfPublicationInput.addModifyListener(dirtyMaker);
+        label = new Label(parent, SWT.None);
+        label.setText("Year of publication:");
+        yearOfPublicationInput = new Text(parent, SWT.None);
+        yearOfPublicationInput.setLayoutData(gd);
+        yearOfPublicationInput.addModifyListener(dirtyMaker);
 
-		Button addButton = new Button(parent, SWT.None);
-		addButton.setText("Save");
-		addButton.addSelectionListener(new SelectionListener() {
+        Button addButton = new Button(parent, SWT.None);
+        addButton.setText("Save");
+        addButton.addSelectionListener(new SelectionListener() {
 
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				save();
-			}
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                save();
+            }
 
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				System.out.println("widgetDefaultSelected");
-			}
-		});
-	}
+            @Override
+            public void widgetDefaultSelected(SelectionEvent e) {
+                System.out.println("widgetDefaultSelected");
+            }
+        });
+    }
 
-	@Focus
-	public void onFocus() {
-	}
+    @Focus
+    public void onFocus() {
+    }
 
-	@Persist
-	public void save() {
-		Book newBook;
-		try {
-			newBook = new Book(authorInput.getText(), titleInput.getText(),
-					yearOfPublicationInput.getText());
-			BookRepositoryFactory.getInstance().addBook(newBook);
-			dirty.setDirty(false);
-		} catch (NumberFormatException e) {
-			MessageDialog.openError(parent.getShell(), "Couldn't add new book",
-					"Illegal value in Year field");
-		}
-	}
+    @Persist
+    public void save() {
+        Book newBook;
+        try {
+            newBook = new Book(authorInput.getText(), titleInput.getText(),
+                    yearOfPublicationInput.getText());
+            BookRepositoryFactory.getInstance().addBook(newBook);
+            dirty.setDirty(false);
+        } catch (NumberFormatException e) {
+            MessageDialog.openError(parent.getShell(), "Couldn't add new book",
+                    "Illegal value in Year field");
+        }
+    }
 
 }
