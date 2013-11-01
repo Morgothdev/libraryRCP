@@ -100,7 +100,6 @@ public class XMLBooksRepository extends BooksRepositoryBase {
 
 				byte[] readed = new byte[100000];
 				fileInputStream.read(readed);
-				System.out.println(readed.length + " znaków: \"" + (new String(readed)) + "\"");
 				readedList = (Map) xStream.fromXML(new String(readed));
 				maxID = 0;
 				for (Book book : readedList.values()) {

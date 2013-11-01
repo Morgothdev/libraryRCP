@@ -12,6 +12,8 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ListViewer;
@@ -28,23 +30,25 @@ public class ListBookPart {
 	private IEventBroker eventBroker;
 	@Inject
 	private IEclipseContext eclipseContext;
+	private Composite parent;
 
 	@PostConstruct
 	@Inject
 	public void createPartControl(Composite parent) {
+		this.parent = parent;
 		viewer = new ListViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new ListContentProvider());
 		viewer.setLabelProvider(new ListItemBooksLabelProvider());
 		BookModel bookModel = ContextInjectionFactory.make(BookModel.class, eclipseContext);
 		viewer.setInput(bookModel);
 
-		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
-
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			
 			@Override
-			public void selectionChanged(SelectionChangedEvent event) {
+			public void doubleClick(DoubleClickEvent event) {
 				IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
 				Book selectedBook = (Book) thisSelection.getFirstElement();
-				eventBroker.post(MyEventConstants.TOPIC_BOOK_SELECTED, selectedBook);
+				eventBroker.send(MyEventConstants.TOPIC_BOOK_SELECTED, selectedBook);
 			}
 		});
 	}

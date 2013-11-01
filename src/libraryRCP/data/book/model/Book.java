@@ -1,6 +1,6 @@
 package libraryRCP.data.book.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,9 +25,9 @@ public class Book {
 	@XmlElement
 	private Book.STATUS status;
 	@XmlElement
-	private Date loanedDate;
+	private Calendar loanedDate;
 	@XmlElement
-	private Date dateOfReturn;
+	private Calendar dateOfReturn;
 	@XmlElement
 	private Integer yearOfPublication;
 
@@ -44,8 +44,8 @@ public class Book {
 		dateOfReturn = null;
 	}
 
-	public Book(long id, String author, String title, STATUS status, Date loanedDate,
-			Date dateOfReturn, Integer yearOfPublication) {
+	public Book(long id, String author, String title, STATUS status, Calendar loanedDate,
+			Calendar dateOfReturn, Integer yearOfPublication) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -74,20 +74,20 @@ public class Book {
 		return this;
 	}
 
-	public Date getLoanedDate() {
+	public Calendar getLoanedDate() {
 		return loanedDate;
 	}
 
-	public Book setLoanedDate(Date loanedDate) {
+	public Book setLoanedDate(Calendar loanedDate) {
 		this.loanedDate = loanedDate;
 		return this;
 	}
 
-	public Date getDateOfReturn() {
+	public Calendar getDateOfReturn() {
 		return dateOfReturn;
 	}
 
-	public Book setDateOfReturn(Date dateOfReturn) {
+	public Book setDateOfReturn(Calendar dateOfReturn) {
 		this.dateOfReturn = dateOfReturn;
 		return this;
 	}

@@ -14,6 +14,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -47,21 +48,27 @@ public class AddBookPart {
 				dirty.setDirty(true);
 			}
 		};
-
+		GridData gd = new GridData();
+		gd.grabExcessHorizontalSpace=true;
+		gd.horizontalAlignment = SWT.FILL;
+		
 		label = new Label(parent, SWT.None);
 		label.setText("Title:");
 		titleInput = new Text(parent, SWT.None);
+		titleInput.setLayoutData(gd);
 		titleInput.addModifyListener(dirtyMaker);
+
 
 		label = new Label(parent, SWT.None);
 		label.setText("Author:");
 		authorInput = new Text(parent, SWT.FILL);
-
+		authorInput.setLayoutData(gd);
 		authorInput.addModifyListener(dirtyMaker);
 
 		label = new Label(parent, SWT.None);
 		label.setText("Year of publication:");
 		yearOfPublicationInput = new Text(parent, SWT.None);
+		yearOfPublicationInput.setLayoutData(gd);
 		yearOfPublicationInput.addModifyListener(dirtyMaker);
 
 		Button addButton = new Button(parent, SWT.None);

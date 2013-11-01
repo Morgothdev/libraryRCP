@@ -17,7 +17,9 @@
               <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2">
-              <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview"/>
+              <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview">
+                <handlers xmi:id="_v5BlAELXEeO_jfNSXUsf-g" elementId="libraryrcp.handler.book.update" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.UpdateBookHandler" command="_lZVoIELZEeO_jfNSXUsf-g"/>
+              </children>
             </children>
           </children>
         </children>
@@ -31,6 +33,7 @@
   </rootContext>
   <commands xmi:id="_sJIaAEJiEeOzUrcSEvtKuA" elementId="libraryRCP.commands.book.delete" commandName="DeleteBook"/>
   <commands xmi:id="_MN1OIEJ6EeOEY_y4pkLcHg" elementId="libraryrcp.command.books.add" commandName="Add Book"/>
+  <commands xmi:id="_lZVoIELZEeO_jfNSXUsf-g" elementId="libraryrcp.command.book.update" commandName="update book"/>
   <addons xmi:id="_O-oOgj_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_O-oOgz_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_O-oOhD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

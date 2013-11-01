@@ -1,39 +1,47 @@
 package libraryRCP.gui.overviewPart;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Logger;
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
 import libraryRCP.data.book.model.Book;
+import libraryRCP.data.book.model.Book.STATUS;
 import libraryRCP.data.book.model.BookRepositoryFactory;
 import libraryRCP.gui.MyEventConstants;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 
 public class BookOverviewPart {
 
 	private Label titleLabel;
 	private Label authorLabel;
-	private Label statusLabel;
 	private Label yearOfPublicationLabel;
-	private Label loanedDateLabel;
-	private Label dateOfReturnLabel;
 	private Composite parent;
+
+	private Book overviewedBook;
+	@Inject
+	protected IEventBroker eventBroker;
+
+	private Combo statusWidget;
+	private DateTime dateOfReturnWidget;
+	private DateTime loanedDateWidget;
 
 	@Inject
 	public BookOverviewPart(Composite parent) {
 		this.parent = parent;
-		GridLayout layout = new GridLayout(2, false);
+
+		GridLayout layout = new GridLayout(2, true);
 		parent.setLayout(layout);
 
 		Label label;
@@ -42,18 +50,9 @@ public class BookOverviewPart {
 		label.setText("Title:");
 		titleLabel = new Label(parent, SWT.None);
 
-		// BundleActivatorImpl bundleActivator =
-		// BundleActivatorImpl.getInstance();
-
-		titleLabel.setText(Platform.getLocation().toFile().getAbsolutePath());
-
 		label = new Label(parent, SWT.None);
 		label.setText("Author:");
 		authorLabel = new Label(parent, SWT.None);
-
-		label = new Label(parent, SWT.None);
-		label.setText("Status: ");
-		statusLabel = new Label(parent, SWT.None);
 
 		label = new Label(parent, SWT.None);
 		label.setText("Year of publication:");
@@ -61,40 +60,98 @@ public class BookOverviewPart {
 
 		label = new Label(parent, SWT.None);
 		label.setText("Loaned date:");
-		loanedDateLabel = new Label(parent, SWT.None);
+		loanedDateWidget = new DateTime(parent, SWT.None);
+		setDateTimeContainsEmptyDate(loanedDateWidget);
 
 		label = new Label(parent, SWT.None);
 		label.setText("Date of return:");
-		dateOfReturnLabel = new Label(parent, SWT.None);
+		dateOfReturnWidget = new DateTime(parent, SWT.None);
+		setDateTimeContainsEmptyDate(dateOfReturnWidget);
 
-	}
+		label = new Label(parent, SWT.None);
+		label.setText("Status:");
+		statusWidget = new Combo(parent, SWT.None);
+		statusWidget.setBounds(50, 50, 150, 65);
+		setComboContainsEmptyStatus(statusWidget);
 
-	@Focus
-	public void onFocus() {
-		authorLabel.setText((BookRepositoryFactory.getInstance() != null) ? BookRepositoryFactory
-				.getInstance().getClass().getName() : "NULL");
+		Button saveButton = new Button(parent, SWT.CENTER);
+		saveButton.setText("Save");
+		saveButton.addSelectionListener(new SelectionListener() {
 
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Combo combo = (Combo) e.getSource();
+				String selectedStatus = combo.getItem(combo.getSelectionIndex());
+				overviewedBook.setStatus(Book.STATUS.valueOf(selectedStatus.toUpperCase()));
+				BookRepositoryFactory.getInstance().updateBook(overviewedBook);
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 	}
 
 	@Inject
 	@Optional
 	private void getNotified(@UIEventTopic(MyEventConstants.TOPIC_BOOK_SELECTED) Book selectedBook) {
-		Logger.getLogger(getClass().getName()).info("selected " + selectedBook.getId());
+		overviewedBook = selectedBook;
+
 		titleLabel.setText(selectedBook.getTitle());
+		titleLabel.redraw();
 		authorLabel.setText(selectedBook.getAuthor());
-		statusLabel.setText(selectedBook.getStatus().name().toLowerCase());
+		authorLabel.redraw();
 		yearOfPublicationLabel.setText(selectedBook.getYearOfPublication().toString());
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY MM DD", Locale.ENGLISH);
-		Date loanedDate = selectedBook.getLoanedDate();
-		String dateString = (loanedDate != null) ? simpleDateFormat.format(loanedDate)
-				: "---------";
-		loanedDateLabel.setText(dateString);
-		Date dateOfReturn = selectedBook.getDateOfReturn();
-		String returnDateString = (dateOfReturn != null) ? simpleDateFormat.format(dateOfReturn)
-				: "---------";
-		dateOfReturnLabel.setText(returnDateString);
+		yearOfPublicationLabel.redraw();
+		System.out.println("dates: " + selectedBook.getDateOfReturn() + " "
+				+ selectedBook.getLoanedDate());
+		setCompositeContainsDate(loanedDateWidget, selectedBook.getLoanedDate());
+		setCompositeContainsDate(dateOfReturnWidget, selectedBook.getDateOfReturn());
+		setCompositeContainsStatus(statusWidget, selectedBook.getStatus());
+
+		parent.layout();
 		parent.redraw();
 		parent.pack(true);
 	}
 
+	private void setCompositeContainsStatus(Combo comboWidget, STATUS status) {
+		if (status == null) {
+			setComboContainsEmptyStatus(comboWidget);
+		} else {
+			setComboContainsFullStatus(comboWidget, status);
+		}
+	}
+
+	private void setComboContainsFullStatus(Combo comboWidget, STATUS status) {
+		comboWidget.setEnabled(true);
+		STATUS[] statuses = Book.STATUS.values();
+		String[] statusesNames = new String[statuses.length];
+		for (int i = 0; i < statuses.length; i++) {
+			statusesNames[i] = statuses[i].name().toLowerCase();
+		}
+		comboWidget.setItems(statusesNames);
+		comboWidget.select(comboWidget.indexOf(status.name().toLowerCase()));
+	}
+
+	private void setComboContainsEmptyStatus(Combo comboWidget) {
+		comboWidget.setEnabled(false);
+	}
+
+	private void setCompositeContainsDate(DateTime dateTimeWidget, Calendar date) {
+		if (date == null) {
+			setDateTimeContainsEmptyDate(dateTimeWidget);
+		} else {
+			setDateTimeContainsFullDate(dateTimeWidget, date);
+		}
+	}
+
+	private void setDateTimeContainsFullDate(DateTime dateTimeWidget, Calendar date) {
+		dateTimeWidget.setEnabled(true);
+		dateTimeWidget.setDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH),
+				date.get(Calendar.DAY_OF_MONTH));
+	}
+
+	private void setDateTimeContainsEmptyDate(DateTime dateTimeWidget) {
+		dateTimeWidget.setEnabled(false);
+	}
 }
