@@ -94,7 +94,7 @@ public class BookOverviewPart {
         Label label;
         label = new Label(parent, SWT.None);
         label.setText("Loaned date:");
-        loanedDateWidget = new DateTime(parent, SWT.DATE);
+        loanedDateWidget = new DateTime(parent, SWT.CALENDAR);
         loanButton = new Button(parent, SWT.None);
         loanButton.setText("Loan");
         loanButton.addSelectionListener(new SelectionListener() {
@@ -134,7 +134,7 @@ public class BookOverviewPart {
 
         dateOfReturnWidget = new Label(parent, SWT.None);
         dateOfReturnWidget.setText("----------");
-        redColor = new Color(dateOfReturnWidget.getDisplay(), 102, 255, 102);
+        redColor = new Color(dateOfReturnWidget.getDisplay(), 255  , 0, 0);
         blackColor = new Color(dateOfReturnWidget.getDisplay(), 0, 0, 0);
         dateOfReturnWidget.addDisposeListener(new DisposeListener() {
 

@@ -3,20 +3,21 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_O-oOgT_MEeOrC_Dv1DZ4vA" label="LibraryRCP" x="100" y="100" width="800" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_upOGED_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_vC5KUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspective.0">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_v4wbUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.0" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_3OMX0D_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.0">
-            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_v4wbUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.0" containerData="" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_3OMX0D_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.0" containerData="1000">
+            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List" bindingContexts="_VtTvUEM1EeOAzZ4bLKsqeg">
+              <handlers xmi:id="_YSWNAEM3EeOAzZ4bLKsqeg" elementId="libraryrcp.handler.0" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.DeleteBookHandler" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
               <menus xsi:type="menu:PopupMenu" xmi:id="_1SEUcEJiEeOzUrcSEvtKuA" elementId="libraryrcp.parts.booksList.popupmenu" label="Menuds">
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_2Fi_0EJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.delete" label="Delete" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_59SGYEJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.changeStatus" label="ChangeStatus"/>
               </menus>
             </children>
           </children>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1">
-            <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1" containerData="2000">
+            <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1" containerData="1000">
               <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book"/>
             </children>
-            <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2">
+            <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2" containerData="3000">
               <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview">
                 <handlers xmi:id="_v5BlAELXEeO_jfNSXUsf-g" elementId="libraryrcp.handler.book.update" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.UpdateBookHandler" command="_lZVoIELZEeO_jfNSXUsf-g"/>
               </children>
@@ -27,9 +28,13 @@
     </children>
   </children>
   <handlers xmi:id="_T3IykEJeEeOzUrcSEvtKuA" elementId="libraryrcp.handlers.book.delete" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.DeleteBookHandler" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
+  <bindingTables xmi:id="_cmhX8EM3EeOAzZ4bLKsqeg" elementId="libraryrcp.bindingtable.0" bindingContext="_VtTvUEM1EeOAzZ4bLKsqeg">
+    <bindings xmi:id="_gcbSgEM3EeOAzZ4bLKsqeg" elementId="libraryrcp.keybinding.0" keySequence="DEL" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
+  </bindingTables>
   <rootContext xmi:id="_O-o1kD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_O-o1kT_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_O-o1kj_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+    <children xmi:id="_VtTvUEM1EeOAzZ4bLKsqeg" elementId="libraryrcp.bindingcontext.0" name="listPartContext"/>
   </rootContext>
   <commands xmi:id="_sJIaAEJiEeOzUrcSEvtKuA" elementId="libraryRCP.commands.book.delete" commandName="DeleteBook"/>
   <commands xmi:id="_MN1OIEJ6EeOEY_y4pkLcHg" elementId="libraryrcp.command.books.add" commandName="Add Book"/>

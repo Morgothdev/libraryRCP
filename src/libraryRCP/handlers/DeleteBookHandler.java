@@ -10,8 +10,9 @@ import org.eclipse.e4.ui.model.application.ui.MContext;
 public class DeleteBookHandler {
 
     @Execute
-    public void execute(Book bookToDelete) {
+    public void execute(MContext context) {
         // TODO logger
+        Book bookToDelete = context.getContext().get(Book.class);
         System.out.println("I'm deleting book " + bookToDelete);
         BookRepositoryFactory.getInstance().removeBook(bookToDelete);
     }

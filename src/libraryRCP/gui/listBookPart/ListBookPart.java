@@ -48,6 +48,7 @@ public class ListBookPart {
             public void selectionChanged(SelectionChangedEvent event) {
                 IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
                 Book selectedBook = (Book) thisSelection.getFirstElement();
+                eclipseContext.set(Book.class,selectedBook);
                 eventBroker.send(MyEventConstants.TOPIC_BOOK_SELECTED, selectedBook);
             }
         });
