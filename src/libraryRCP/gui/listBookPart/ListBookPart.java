@@ -14,10 +14,10 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
@@ -42,10 +42,10 @@ public class ListBookPart {
                 EventBrokerStatusChangeListener.class, eclipseContext);
         StatusCheckerJob.getInstance().setOnBookStatusChangeListener(listener);
 
-        viewer.addDoubleClickListener(new IDoubleClickListener() {
-
+        viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+            
             @Override
-            public void doubleClick(DoubleClickEvent event) {
+            public void selectionChanged(SelectionChangedEvent event) {
                 IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
                 Book selectedBook = (Book) thisSelection.getFirstElement();
                 eventBroker.send(MyEventConstants.TOPIC_BOOK_SELECTED, selectedBook);

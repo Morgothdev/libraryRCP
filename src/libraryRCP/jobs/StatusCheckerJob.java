@@ -55,7 +55,6 @@ public class StatusCheckerJob extends Job implements OnChangeDataListener {
 
     @Override
     protected synchronized IStatus run(IProgressMonitor monitor) {
-        System.out.println("scheduler run");
         try {
             for (Book book : books.getAllBooks()) {
                 Book.STATUS previousStatus = mapOfBookStatuses.get(book.getId());

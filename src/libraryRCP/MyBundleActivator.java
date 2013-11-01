@@ -16,6 +16,10 @@ public class MyBundleActivator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
         instance = this;
         this.context = context;
+        createSingletons();
+    }
+
+    private void createSingletons() {
         BookRepositoryFactory.configure(MyWorkspaceFilesRepositor.getProperties());
         StatusCheckerJob bookStatusCheckerJob = StatusCheckerJob.getInstance("checker",
                 BookRepositoryFactory.getInstance());
