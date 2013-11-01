@@ -2,13 +2,11 @@ package libraryRCP;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
-import org.osgi.framework.Bundle;
 
 public class MyWorkspaceFilesRepositor {
 

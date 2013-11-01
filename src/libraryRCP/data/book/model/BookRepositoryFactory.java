@@ -4,18 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
-import libraryRCP.MyBundleActivator;
-import libraryRCP.MyWorkspaceFilesRepositor;
-
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.EclipseContextFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
-
 public class BookRepositoryFactory {
 
 	private static BookRepository instance;
-	private static IEclipseContext eclipseContext;
-
 	private BookRepositoryFactory() {
 	};
 

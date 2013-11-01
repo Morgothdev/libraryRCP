@@ -4,16 +4,9 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import libraryRCP.data.OnChangeDataListener;
 import libraryRCP.data.book.model.Book;
 import libraryRCP.data.book.model.BookRepository;
-import libraryRCP.gui.MyEventConstants;
-
-import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.ui.services.events.EventBrokerFactory;
-import org.eclipse.e4.ui.services.internal.events.EventBroker;
 
 public abstract class BooksRepositoryBase implements BookRepository {
 

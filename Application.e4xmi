@@ -6,21 +6,15 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_v4wbUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.0" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_3OMX0D_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.0">
             <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List">
-              <menus xsi:type="menu:PopupMenu" xmi:id="_1SEUcEJiEeOzUrcSEvtKuA" elementId="libraryrcp.popupmenu.0" label="Menuds">
+              <menus xsi:type="menu:PopupMenu" xmi:id="_1SEUcEJiEeOzUrcSEvtKuA" elementId="libraryrcp.parts.booksList.popupmenu" label="Menuds">
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_2Fi_0EJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.delete" label="Delete" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_59SGYEJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.changeStatus" label="ChangeStatus"/>
-              </menus>
-              <menus xmi:id="_ZbRXQEJjEeOzUrcSEvtKuA" elementId="libraryrcp.menu.0">
-                <tags>ViewMenu</tags>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_aay6kEJjEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.0" label="DElete" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
               </menus>
             </children>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1">
             <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1">
-              <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book">
-                <handlers xmi:id="_Sbu60EJ6EeOEY_y4pkLcHg" elementId="libraryrcp.handler.books.add" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.AddBookHandler" command="_MN1OIEJ6EeOEY_y4pkLcHg"/>
-              </children>
+              <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2">
               <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview"/>

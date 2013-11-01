@@ -13,7 +13,7 @@ public class ListContentProvider implements IStructuredContentProvider {
 
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		this.model=(BookModel)newInput;
+		this.model = (BookModel) newInput;
 	}
 
 	@Override

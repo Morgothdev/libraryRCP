@@ -11,7 +11,6 @@ import libraryRCP.data.book.model.BookRepository;
 import libraryRCP.data.book.model.BookRepositoryFactory;
 import libraryRCP.gui.MyEventConstants;
 
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 
 public class BookModel implements OnChangeDataListener {

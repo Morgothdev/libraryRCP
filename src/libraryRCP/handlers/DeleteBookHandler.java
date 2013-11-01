@@ -12,7 +12,7 @@ public class DeleteBookHandler {
 	@Execute
 	public void execute(Book bookToDelete) {
 		// TODO logger
-		System.out.println("I'm deleting book "+bookToDelete);
+		System.out.println("I'm deleting book " + bookToDelete);
 		BookRepositoryFactory.getInstance().removeBook(bookToDelete);
 	}
 
@@ -21,7 +21,7 @@ public class DeleteBookHandler {
 		if (context == null) {
 			return false;
 		}
-		Book bookToDelete = (Book) context.getContext().get(Book.class);
+		Book bookToDelete = context.getContext().get(Book.class);
 		return bookToDelete != null;
 	}
 

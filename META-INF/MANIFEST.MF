@@ -18,7 +18,8 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.osgi.services;bundle-version="3.3.100",
  org.eclipse.core.filesystem;bundle-version="1.4.0",
  XStreamPlugin;bundle-version="1.0.0",
- org.eclipse.e4.core.commands
+ org.eclipse.e4.core.commands,
+ org.eclipse.e4.ui.workbench.swt;bundle-version="0.12.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: libs/,
  .

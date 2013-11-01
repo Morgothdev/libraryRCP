@@ -2,8 +2,6 @@ package libraryRCP;
 
 import libraryRCP.data.book.model.BookRepositoryFactory;
 
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.ui.internal.services.ContextContextService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
