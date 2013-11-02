@@ -47,8 +47,6 @@ public class BookOverviewPart {
 
     @Inject
     public BookOverviewPart(Composite parent) {
-        this.parent = parent;
-
         GridLayout layout = new GridLayout(3, true);
         parent.setLayout(layout);
 
@@ -134,7 +132,7 @@ public class BookOverviewPart {
 
         dateOfReturnWidget = new Label(parent, SWT.None);
         dateOfReturnWidget.setText("----------");
-        redColor = new Color(dateOfReturnWidget.getDisplay(), 255  , 0, 0);
+        redColor = new Color(dateOfReturnWidget.getDisplay(), 255, 0, 0);
         blackColor = new Color(dateOfReturnWidget.getDisplay(), 0, 0, 0);
         dateOfReturnWidget.addDisposeListener(new DisposeListener() {
 

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_O-oOgD_MEeOrC_Dv1DZ4vA" elementId="org.eclipse.e4.ide.application" bindingContexts="_O-o1kD_MEeOrC_Dv1DZ4vA">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_O-oOgT_MEeOrC_Dv1DZ4vA" label="LibraryRCP" x="100" y="100" width="800" height="600">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_O-oOgT_MEeOrC_Dv1DZ4vA" label="LibraryRCP" x="100" y="100" width="900" height="700">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_upOGED_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspectivestack.0">
       <children xsi:type="advanced:Perspective" xmi:id="_vC5KUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.perspective.0">
         <children xsi:type="basic:PartSashContainer" xmi:id="_v4wbUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.0" containerData="" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_3OMX0D_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.0" containerData="1000">
-            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List" bindingContexts="_VtTvUEM1EeOAzZ4bLKsqeg">
+            <children xsi:type="basic:Part" xmi:id="_7EsvUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.list" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.listBookPart.ListBookPart" label="Books List" iconURI="platform:/plugin/LibraryRCP/icons/list_items_icon_512.png" bindingContexts="_VtTvUEM1EeOAzZ4bLKsqeg">
               <handlers xmi:id="_YSWNAEM3EeOAzZ4bLKsqeg" elementId="libraryrcp.handler.0" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.DeleteBookHandler" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
-              <menus xsi:type="menu:PopupMenu" xmi:id="_1SEUcEJiEeOzUrcSEvtKuA" elementId="libraryrcp.parts.booksList.popupmenu" label="Menuds">
+              <menus xmi:id="_PgiHMEM5EeOAzZ4bLKsqeg" elementId="libraryrcp.menu.0">
+                <tags>ViewMenu</tags>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_2Fi_0EJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.delete" label="Delete" command="_sJIaAEJiEeOzUrcSEvtKuA"/>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_59SGYEJiEeOzUrcSEvtKuA" elementId="libraryrcp.handledmenuitem.changeStatus" label="ChangeStatus"/>
               </menus>
             </children>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_3zjusD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partsashcontainer.1" containerData="2000">
             <children xsi:type="basic:PartStack" xmi:id="_4S7yUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.1" containerData="1000">
-              <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book"/>
+              <children xsi:type="basic:Part" xmi:id="_46s88D_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.Add" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.addBookPart.AddBookPart" label="Add Book" iconURI="platform:/plugin/LibraryRCP/icons/plus_icon_256.png"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_5dYzQD_OEeOQJLwoANM-Ow" elementId="libraryrcp.partstack.2" containerData="3000">
-              <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview">
+              <children xsi:type="basic:Part" xmi:id="_5t4GUD_OEeOQJLwoANM-Ow" elementId="libraryrcp.part.books.overview" contributionURI="bundleclass://LibraryRCP/libraryRCP.gui.overviewPart.BookOverviewPart" label="Overview" iconURI="platform:/plugin/LibraryRCP/icons/eye_icon_128.png">
                 <handlers xmi:id="_v5BlAELXEeO_jfNSXUsf-g" elementId="libraryrcp.handler.book.update" contributionURI="bundleclass://LibraryRCP/libraryRCP.handlers.UpdateBookHandler" command="_lZVoIELZEeO_jfNSXUsf-g"/>
               </children>
             </children>
