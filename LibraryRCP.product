@@ -14,6 +14,7 @@
    <windowImages/>
 
    <launcher>
+      <linux icon="/LibraryRCP/icons/library-icon.xpm"/>
       <solaris/>
       <win useIco="false">
          <bmp/>
