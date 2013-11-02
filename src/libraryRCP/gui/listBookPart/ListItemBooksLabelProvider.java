@@ -9,7 +9,7 @@ public class ListItemBooksLabelProvider extends LabelProvider {
 
     @Override
     public String getText(Object element) {
-        return ((Book) element).getAuthor() + ", " + ((Book) element).getTitle();
+        return ((Book) element).getTitle() + ", " + ((Book) element).getAuthor();
     }
 
     @Override
