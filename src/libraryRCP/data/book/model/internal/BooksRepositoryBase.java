@@ -31,6 +31,7 @@ public abstract class BooksRepositoryBase implements BookRepository {
 
     @Override
     public void notifyOnChangeDataListeners(Book changedBook) {
+        System.out.println("BooksRepositoryBase notifyOnChangeDataListeners "+changedBook);
         for (OnChangeDataListener listener : listeners) {
             listener.onDataChange(changedBook);
         }

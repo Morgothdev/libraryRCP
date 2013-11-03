@@ -56,7 +56,7 @@ public class Book {
         if (another == null) {
             return false;
         }
-        return author.equals(anotherBook.author) && title.equals(anotherBook.title);
+        return id==anotherBook.getId();
     }
 
     public Book.STATUS getStatus() {

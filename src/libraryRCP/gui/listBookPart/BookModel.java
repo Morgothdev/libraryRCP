@@ -28,6 +28,7 @@ public class BookModel implements OnChangeDataListener {
 
     @Override
     public void onDataChange(Book changedBook) {
+        System.out.println("BookModel onDataChange notified and notify in eventBroker");
         eventBroker.post(MyEventConstants.TOPIC_BOOKS_DATA_MODIFIED, changedBook);
     }
 }

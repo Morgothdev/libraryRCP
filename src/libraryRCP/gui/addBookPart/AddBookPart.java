@@ -56,19 +56,22 @@ public class AddBookPart {
         titleInput = new Text(parent, SWT.None);
         titleInput.setLayoutData(gd);
         titleInput.addModifyListener(dirtyMaker);
-
+        titleInput.setMessage("Enter title of new book!");
+        
         label = new Label(parent, SWT.None);
         label.setText("Author:");
         authorInput = new Text(parent, SWT.FILL);
         authorInput.setLayoutData(gd);
         authorInput.addModifyListener(dirtyMaker);
+        authorInput.setMessage("Enter author of new book!");
 
         label = new Label(parent, SWT.None);
         label.setText("Year of publication:");
         yearOfPublicationInput = new Text(parent, SWT.None);
         yearOfPublicationInput.setLayoutData(gd);
         yearOfPublicationInput.addModifyListener(dirtyMaker);
-
+        yearOfPublicationInput.setMessage("Enter year of publication of new book!");
+  
         Button addButton = new Button(parent, SWT.None);
         addButton.setText("Save");
         addButton.addSelectionListener(new SelectionListener() {
@@ -97,6 +100,9 @@ public class AddBookPart {
                     yearOfPublicationInput.getText());
             BookRepositoryFactory.getInstance().addBook(newBook);
             dirty.setDirty(false);
+          //authorInput.setText("");
+           // titleInput.setText("");
+         //   yearOfPublicationInput.setText("");
         } catch (NumberFormatException e) {
             MessageDialog.openError(parent.getShell(), "Couldn't add new book",
                     "Illegal value in Year field");

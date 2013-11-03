@@ -49,7 +49,7 @@ public class XMLBooksRepository extends BooksRepositoryBase {
         Map<Long, Book> books = read();
         books.put(newID, newBook);
         writeListIntoFile(books);
-        notifyOnChangeDataListeners(null);
+        notifyOnChangeDataListeners(newBook);
     }
 
     @Override
