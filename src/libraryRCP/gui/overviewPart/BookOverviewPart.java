@@ -68,6 +68,7 @@ public class BookOverviewPart {
         label.setText("Title:");
         titleLabel = new Label(parent, SWT.None);
         new Label(parent, SWT.None);
+        setEmptyTitleControls();
     }
 
     private void createAuthorControls(Composite parent) {
@@ -76,6 +77,7 @@ public class BookOverviewPart {
         label.setText("Author:");
         authorLabel = new Label(parent, SWT.None);
         new Label(parent, SWT.None);
+        setEmptyAuthorControls();
     }
 
     private void createYearOfPublicationControls(Composite parent) {
@@ -84,6 +86,7 @@ public class BookOverviewPart {
         label.setText("Year of publication:");
         yearOfPublicationLabel = new Label(parent, SWT.None);
         new Label(parent, SWT.None);
+        setEmptyYearOfPublicationControls();
     }
 
     private void createBookStatusControls(Composite parent) {
@@ -91,8 +94,8 @@ public class BookOverviewPart {
         label = new Label(parent, SWT.None);
         label.setText("Status:");
         statusWidget = new Label(parent, SWT.None);
-        setEmptyStatusControls();
         new Label(parent, SWT.None);
+        setEmptyStatusControls();
     }
 
     private void createLoanDateControls(Composite parent) {
@@ -103,7 +106,7 @@ public class BookOverviewPart {
         loanButton = new Button(parent, SWT.None);
         loanButton.setText("Loan");
         loanButton.addSelectionListener(new SelectionListener() {
-    
+
             @Override
             public void widgetSelected(SelectionEvent e) {
                 Calendar newLoanedDate = new GregorianCalendar(loanedDateWidget.getYear(),
@@ -113,12 +116,12 @@ public class BookOverviewPart {
                 overviewedBook.setStatus(STATUS.LOANED);
                 BookRepositoryFactory.getInstance().updateBook(overviewedBook);
             }
-    
+
             @Override
             public void widgetDefaultSelected(SelectionEvent e) {
             }
         });
-    
+
         setEmptyLoanControls();
     }
 
@@ -126,24 +129,24 @@ public class BookOverviewPart {
         Label label;
         label = new Label(parent, SWT.None);
         label.setText("Date of return:");
-    
+
         dateOfReturnWidget = new Label(parent, SWT.None);
         redColor = new Color(dateOfReturnWidget.getDisplay(), 255, 0, 0);
         blackColor = new Color(dateOfReturnWidget.getDisplay(), 0, 0, 0);
         dateOfReturnWidget.addDisposeListener(new DisposeListener() {
-    
+
             @Override
             public void widgetDisposed(DisposeEvent e) {
                 blackColor.dispose();
                 redColor.dispose();
             }
         });
-    
+
         returnedButton = new Button(parent, SWT.None);
         returnedButton.setText("Return");
         returnedButton.setText("Return");
         returnedButton.addSelectionListener(new SelectionListener() {
-    
+
             @Override
             public void widgetSelected(SelectionEvent e) {
                 overviewedBook.setStatus(Book.STATUS.AVAIBLE);
@@ -151,7 +154,7 @@ public class BookOverviewPart {
                 overviewedBook.setLoanedDate(null);
                 BookRepositoryFactory.getInstance().updateBook(overviewedBook);
             }
-    
+
             @Override
             public void widgetDefaultSelected(SelectionEvent e) {
             }
@@ -159,9 +162,47 @@ public class BookOverviewPart {
         setEmptyReturnControls();
     }
 
+    private void setEmptyTitleControls() {
+        titleLabel.setText("----------");
+    }
+
+    private void setEmptyAuthorControls() {
+        authorLabel.setText("----------");
+    }
+
+    private void setEmptyYearOfPublicationControls() {
+        yearOfPublicationLabel.setText("----------");
+    }
+
+    private void setEmptyStatusControls() {
+        statusWidget.setText("----------");
+    }
+
     private void setEmptyLoanControls() {
         loanedDateWidget.setEnabled(false);
         loanButton.setEnabled(false);
+    }
+
+    private void setEmptyReturnControls() {
+        dateOfReturnWidget.setText("----------");
+        dateOfReturnWidget.setForeground(blackColor);
+        returnedButton.setEnabled(false);
+    }
+
+    private void updateTitleControls(Book selectedBook) {
+        titleLabel.setText(selectedBook.getTitle());
+    }
+
+    private void updateAuthorControls(Book selectedBook) {
+        authorLabel.setText(selectedBook.getAuthor());
+    }
+
+    private void updateYearOfPublicationControls(Book selectedBook) {
+        yearOfPublicationLabel.setText(selectedBook.getYearOfPublication().toString());
+    }
+
+    private void updateBookStatusControls() {
+        statusWidget.setText(overviewedBook.getStatus().name());
     }
 
     private void updateLoanedControls() {
@@ -180,12 +221,6 @@ public class BookOverviewPart {
         }
     }
 
-    private void setEmptyReturnControls() {
-        dateOfReturnWidget.setText("----------");
-        dateOfReturnWidget.setForeground(blackColor);
-        returnedButton.setEnabled(false);
-    }
-
     private void updateReturnContols() {
         if (overviewedBook.getStatus().equals(Book.STATUS.LOANED)) {
             dateOfReturnWidget.setText(dateFormatter.format(overviewedBook.getDateOfReturn()
@@ -202,47 +237,6 @@ public class BookOverviewPart {
         }
     }
 
-    private void setEmptyStatusControls() {
-        statusWidget.setText("----------");
-    }
-
-    private void updateBookStatusControls() {
-        statusWidget.setText(overviewedBook.getStatus().name());
-    }
-
-    private void updateControls(Book selectedBook) {
-        overviewedBook = selectedBook;
-    
-        updateTitleControls(selectedBook);
-        updateAuthorControls(selectedBook);
-        updateYearOfPublicationControls(selectedBook);
-    
-        updateLoanedControls();
-        updateReturnContols();
-        updateBookStatusControls();
-    
-        parent.layout();
-        parent.redraw();
-    }
-
-    private void updateYearOfPublicationControls(Book selectedBook) {
-        yearOfPublicationLabel.setText(selectedBook.getYearOfPublication().toString());
-    }
-
-    private void updateAuthorControls(Book selectedBook) {
-        authorLabel.setText(selectedBook.getAuthor());
-    }
-
-    private void updateTitleControls(Book selectedBook) {
-        titleLabel.setText(selectedBook.getTitle());
-    }
-
-    private Calendar getReturnDateFromLoanedDate(Calendar loanedDate) {
-        Calendar returnDate = (Calendar) loanedDate.clone();
-        returnDate.add(Calendar.MONTH, 1);
-        return returnDate;
-    }
-
     @Inject
     @Optional
     private void getNotifiedOnSelected(
@@ -250,7 +244,7 @@ public class BookOverviewPart {
         if (selectedBook != null) {
             updateControls(selectedBook);
         } else {
-
+           setEmptyControls();
         }
     }
 
@@ -261,5 +255,35 @@ public class BookOverviewPart {
         if (selectedBook != null && selectedBook.equals(overviewedBook)) {
             updateControls(selectedBook);
         }
+    }
+
+    private void updateControls(Book selectedBook) {
+        overviewedBook = selectedBook;
+
+        updateTitleControls(selectedBook);
+        updateAuthorControls(selectedBook);
+        updateYearOfPublicationControls(selectedBook);
+
+        updateLoanedControls();
+        updateReturnContols();
+        updateBookStatusControls();
+
+        parent.layout();
+        parent.redraw();
+    }
+    
+    private void setEmptyControls(){
+        setEmptyTitleControls();
+        setEmptyAuthorControls();
+        setEmptyYearOfPublicationControls();
+        setEmptyStatusControls();
+        setEmptyLoanControls();
+        setEmptyReturnControls();
+    }
+
+    private Calendar getReturnDateFromLoanedDate(Calendar loanedDate) {
+        Calendar returnDate = (Calendar) loanedDate.clone();
+        returnDate.add(Calendar.MONTH, 1);
+        return returnDate;
     }
 }
